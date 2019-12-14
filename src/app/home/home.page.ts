@@ -1,12 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ArticlesService } from './articles.service';
+import { Article } from './article';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit {
 
-  constructor() {}
+  articles: Observable<Article>
+
+  constructor( private articalsService: ArticlesService) {}
+
+  ngOnInit() {
+    this.articles = this.articalsService.getArticles()
+  }
 
 }
