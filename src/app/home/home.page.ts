@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { Observable } from 'rxjs';
+
 import { ArticlesService } from './articles.service';
 import { Article } from './models/article';
-import { Observable } from 'rxjs';
+import { ArticleDetailComponent } from './article-detail/article-detail.component';
 
 @Component({
   selector: 'app-home',
@@ -12,10 +15,25 @@ export class HomePage implements OnInit {
 
   articles: Observable<Article[]>
 
-  constructor( private articalsService: ArticlesService) {}
+  constructor( 
+    private articalsService: ArticlesService,
+    private modalCtrl: ModalController
+  ) {}
 
   ngOnInit() {
     this.articles = this.articalsService.getArticles()
+  }
+
+  async openDetailModal(articleId: number, articleURL: string) {
+    console.log(articleURL, articleId)
+    const modal = await this.modalCtrl.create({
+      component: ArticleDetailComponent,
+      componentProps: {
+        url: articleURL
+      }
+    });
+
+    return await modal.present();
   }
 
 }

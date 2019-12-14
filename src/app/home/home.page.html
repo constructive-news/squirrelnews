@@ -1,8 +1,7 @@
 <ion-content class="ion-padding">
   <ion-slides pager="true">
-    <ion-slide *ngFor="let article of articles | async"
-      routerLink="/article/:articleID">
-      <ion-card>
+    <ion-slide *ngFor="let article of articles | async">
+      <ion-card (click)="openDetailModal(article.id, article.originURL)">
         <img src="{{article.imageURL}}"/>
         <ion-card-header>
           <ion-card-subtitle>{{article.origin}}</ion-card-subtitle>

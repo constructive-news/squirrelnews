@@ -11,6 +11,7 @@ export class ArticlesService {
       id: 1,
       name: "Sternschnuppen Schauer am Wochenende", date: new Date('yyyy-mm-dd').toDateString(), 
       origin: "Spiegel Online", 
+      originURL: 'https://www.spiegel.de/wissenschaft/natur/klimakonferenz-in-madrid-droht-zu-scheitern-a-1301283.html',
       teaser: `
       Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, 
       sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. 
@@ -24,6 +25,7 @@ export class ArticlesService {
       id: 2,
       name: "Sternschnuppen Schauer am Wochenende", date: new Date('yyyy-mm-dd').toDateString(), 
       origin: "Spiegel Online", 
+      originURL: 'https://www.spiegel.de/wissenschaft/natur/klimakonferenz-in-madrid-droht-zu-scheitern-a-1301283.html',
       teaser: `
       Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, 
       sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. 
@@ -36,6 +38,7 @@ export class ArticlesService {
       id: 3,
       name: "Sternschnuppen Schauer unter der Woche", date: new Date('yyyy-mm-dd').toDateString(), 
       origin: "Spiegel Online", 
+      originURL: 'https://www.spiegel.de/wissenschaft/natur/klimakonferenz-in-madrid-droht-zu-scheitern-a-1301283.html',
       teaser: `
         Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, 
         sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. 

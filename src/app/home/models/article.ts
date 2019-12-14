@@ -6,5 +6,6 @@ export interface Article {
     imageSource: string;
     category?: string;
     origin: string;
+    originURL: string;
     date: string;
 }

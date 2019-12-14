@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 
 import { HomePage } from './home.page';
 import { ArticlesService } from './articles.service';
+import { ArticleDetailComponent } from './article-detail/article-detail.component';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { ArticlesService } from './articles.service';
       }
     ])
   ],
-  declarations: [HomePage],
+  declarations: [HomePage, ArticleDetailComponent],
+  entryComponents: [ArticleDetailComponent],
   providers: [ArticlesService]
 })
 export class HomePageModule {}
