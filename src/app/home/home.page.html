@@ -1,11 +1,17 @@
-<ion-content>
-
+<ion-content class="ion-padding">
   <ion-slides pager="true">
     <ion-slide *ngFor="let article of articles | async">
-      
-      {{article.name}}
-
+      <ion-card>
+        <img src="{{article.imageURL}}"/>
+        <ion-card-header>
+          <ion-card-subtitle>{{article.origin}}</ion-card-subtitle>
+          <ion-card-title>{{article.name}}</ion-card-title>
+          <ion-card-subtitle>{{article.date}}</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          {{article.teaser}}
+        </ion-card-content>
+      </ion-card>
     </ion-slide>
   </ion-slides>
-
 </ion-content>
