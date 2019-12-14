@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 })
 export class HomePage implements OnInit {
 
-  articles: Observable<Article>
+  articles: Observable<Article[]>
 
   constructor( private articalsService: ArticlesService) {}
 
