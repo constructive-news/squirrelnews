@@ -1,15 +1,8 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
 
   <ion-slides pager="true">
     <ion-slide *ngFor="let article of articles | async">
+      
       {{article.name}}
 
     </ion-slide>
