@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-article-detail',
@@ -6,9 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./article-detail.component.scss'],
 })
 export class ArticleDetailComponent implements OnInit {
-
-  constructor() { }
+  @Input() url: string
+  constructor(private modal: ModalController) { }
 
   ngOnInit() {}
+
+  dismiss() {
+    this.modal.dismiss();
+  }
 
 }
