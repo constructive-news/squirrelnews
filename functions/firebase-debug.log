@@ -1,0 +1,59 @@
+[debug] [2019-12-29T18:22:31.460Z] ----------------------------------------------------------------------
+[debug] [2019-12-29T18:22:31.461Z] Command:       /Users/olivererxleben/.nvm/versions/node/v13.2.0/bin/node /Users/olivererxleben/.nvm/versions/node/v13.2.0/bin/firebase init
+[debug] [2019-12-29T18:22:31.461Z] CLI Version:   7.11.0
+[debug] [2019-12-29T18:22:31.461Z] Platform:      darwin
+[debug] [2019-12-29T18:22:31.461Z] Node Version:  v13.2.0
+[debug] [2019-12-29T18:22:31.462Z] Time:          Sun Dec 29 2019 19:22:31 GMT+0100 (Mitteleuropäische Normalzeit)
+[debug] [2019-12-29T18:22:31.462Z] ----------------------------------------------------------------------
+[debug] [2019-12-29T18:22:31.462Z] 
+[debug] [2019-12-29T18:22:31.468Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-12-29T18:22:31.468Z] > authorizing via signed-in user
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /Users/olivererxleben/Documents/projects/squirrel-news/squirrelnews-app/functions
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2019-12-29T18:24:13.276Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2019-12-29T18:24:13.277Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2019-12-29T18:24:13.468Z] <<< HTTP RESPONSE 200
+[debug] [2019-12-29T18:24:13.480Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects?pageSize=100  
+ 
+[debug] [2019-12-29T18:24:14.360Z] <<< HTTP RESPONSE 200
+[info] i  Using project squirrel-news-789fd (squirrel-news)
+[info] 
+=== Functions Setup
+[info] 
+[info] A functions directory will be created in your project with a Node.js
+[info] package pre-configured. Functions can be deployed with firebase deploy.
+[info] 
+[debug] [2019-12-29T18:24:24.924Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-12-29T18:24:24.924Z] > authorizing via signed-in user
+[debug] [2019-12-29T18:24:24.924Z] [iam] checking project squirrel-news-789fd for permissions ["firebase.projects.get"]
+[debug] [2019-12-29T18:24:24.925Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/squirrel-news-789fd:testIamPermissions  
+
+[debug] [2019-12-29T18:24:25.777Z] <<< HTTP RESPONSE 200
+[debug] [2019-12-29T18:24:25.778Z] >>> HTTP REQUEST POST https://serviceusage.googleapis.com/v1/projects/squirrel-news-789fd/services/cloudfunctions.googleapis.com:enable  
+ 
+[debug] [2019-12-29T18:24:25.779Z] >>> HTTP REQUEST POST https://serviceusage.googleapis.com/v1/projects/squirrel-news-789fd/services/runtimeconfig.googleapis.com:enable  
+ 
+[debug] [2019-12-29T18:24:26.205Z] <<< HTTP RESPONSE 200
+[debug] [2019-12-29T18:24:26.830Z] <<< HTTP RESPONSE 200
+[info] ✔  Wrote functions/package.json
+[info] ✔  Wrote functions/tslint.json
+[info] ✔  Wrote functions/tsconfig.json
+[info] ✔  Wrote functions/src/index.ts
+[info] ✔  Wrote functions/.gitignore
