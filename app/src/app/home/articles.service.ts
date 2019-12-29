@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Article } from './models/article';
 import { Observable, from } from 'rxjs';
-import { filter, toArray } from 'rxjs/operators';
+import { filter, toArray, tap } from 'rxjs/operators';
+import { AngularFirestore } from '@angular/fire/firestore';
+
 
 @Injectable()
 export class ArticlesService {
@@ -49,7 +51,16 @@ export class ArticlesService {
     }
   ]
 
-  constructor() { }
+  constructor(
+    private db: AngularFirestore
+  ) {
+
+    this.db.collection('news').valueChanges()
+      .pipe(
+        tap( data => console.log(data))
+      )
+      .subscribe();
+  }
 
   public getArticles(date: Date = new Date('yyyy-mm-dd')): Observable<Article[]> {
 
