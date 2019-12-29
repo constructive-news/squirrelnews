@@ -1,4 +1,6 @@
 # squirrelnews
-Squirrel News App
+Squirrel News App Monorepo contains all custom source
 
 ## Frontend
+
+## Firebase 
