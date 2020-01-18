@@ -38,7 +38,6 @@ export const publishCurations = functions.https.onRequest( async (request, respo
     const tokenQuery = await admin.firestore().collection('access-tokens').doc('sheet').get()
       
     if (tokenQuery.get('token') === request.headers['token']) {
-      // TODO: parse request body and insert into firestore
       const requestBody = JSON.parse(request.body);
 
       if (requestBody.dry !== undefined && requestBody.dry) {
