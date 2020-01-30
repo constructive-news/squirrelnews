@@ -66,3 +66,6 @@ node_modules/
 
 # Firebase secrets
 .runtimeconfig.json
+
+# firebase hosting folder 
+public/
