@@ -1,7 +1,7 @@
 export interface Article {
     name: string;
-    teaser: string;
-    imageURL: string;
+    teaserText: string;
+    teaserImageURL: string;
     imageSource: string;
     category?: string;
     origin: string;
