@@ -1,17 +1,24 @@
-<ion-content class="ion-padding">
+<ion-content>
   <ion-slides pager="true">
     <ion-slide *ngFor="let article of articles | async">
-      <ion-card (click)="openDetailModal(article.id, article.originURL)">
-        <img src="{{article.imageUrl}}"/>
-        <ion-card-header>
-          <ion-card-subtitle>{{article.origin}}</ion-card-subtitle>
-          <ion-card-title>{{article.name}}</ion-card-title>
-          <!-- <ion-card-subtitle>{{article.date}}</ion-card-subtitle> -->
-        </ion-card-header>
-        <ion-card-content>
-          {{article.teaser}}
-        </ion-card-content>
-      </ion-card>
+      <div class="wrapper-article">
+        <div class="wrapper-image" 
+        [ngStyle]="{ 
+          'background': 'url(' + article.imageUrl + ') no-repeat top center',
+          'background-size': 'cover'
+        }">
+      </div>
+      <div class="content ion-text-left">
+        <h2>{{ article.originTitle }}</h2>
+        <ion-chip *ngIf="article.source">
+          <ion-label>{{article.source}}</ion-label>
+        </ion-chip>
+        <p>
+          {{ article.originTeaser }}
+        </p>
+      </div>
+      <ion-button expand="block" (click)="openDetailModal(article.origin)">Read More</ion-button>
+    </div>
     </ion-slide>
   </ion-slides>
 </ion-content>

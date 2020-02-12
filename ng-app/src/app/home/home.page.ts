@@ -3,7 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 
 import { ArticlesService } from './articles.service';
-import { Article } from './models/article';
+import { Article } from './article';
 import { ArticleDetailComponent } from './article-detail/article-detail.component';
 
 @Component({
@@ -24,8 +24,8 @@ export class HomePage implements OnInit {
     this.articles = this.articalsService.getArticles()
   }
 
-  async openDetailModal(articleId: number, articleURL: string) {
-    console.log(articleURL, articleId)
+  async openDetailModal(articleURL: string) {
+    console.log(articleURL);
     const modal = await this.modalCtrl.create({
       component: ArticleDetailComponent,
       componentProps: {

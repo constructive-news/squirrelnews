@@ -2,6 +2,7 @@ import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 
 interface Article {
+  id: string;
   title: string;
   teaser: string;
   source: string;
@@ -46,11 +47,8 @@ function ISO8601_week_no(dt: Date) {
  */
 export const publishCurations = functions.https.onRequest(async (request, response) => {
 
-  if (request.method !== 'POST') {
-    response.status(405).json({
-      message: "Method is not allowed here."
-    })
-  } else {
+  // create new curation
+  if (request.method === 'POST') {
     const tokenQuery = await admin.firestore().collection('access-tokens').doc('sheet').get()
 
     if (tokenQuery.get('token') === request.headers['token']) {
@@ -65,24 +63,54 @@ export const publishCurations = functions.https.onRequest(async (request, respon
         response.status(400).send();
 
       } else {
-        const dbResults: String[] = [];
-        requestBody.articles.forEach(async (element: Article) => {
-          
+        await requestBody.articles.forEach(async (element: Article) => {
+
           element.issue = ISO8601_week_no(new Date())
 
-          const result = await admin.firestore().collection('news').add(element)
-          dbResults.push(result.id);
-        });
-
-        response.status(200).json({
-          message: `success`
+          const result = await admin.firestore().collection('news').add(element);
+          
+          response.status(200).json({
+            message: `success`,
+            inserted: result.id
+          });
         });
       }
     } else {
       response.status(401);
     }
+  } else if (request.method === 'PATCH') {
+    // update curations
+    const tokenQuery = await admin.firestore().collection('access-tokens').doc('sheet').get()
 
+    if (tokenQuery.get('token') === request.headers['token']) {
+      const requestBody = request.body;
+
+      if (requestBody.dry !== undefined && requestBody.dry) {
+        response.status(200).json({
+          message: "dryrun PATCH"
+        });
+
+      } else if (requestBody.articles === undefined || requestBody.articles.length === 0) {
+        response.status(400).send();
+
+      } else {
+        requestBody.articles.forEach(async (element: Article) => {
+          admin.firestore().collection('news').where('originTitle', '==', element.originTitle).get().then(
+            (snapshot) => {
+              console.log(snapshot.size);
+            },
+            (err) => { console.error('err', err) }
+          )
+        })
+      }
+    }
+  } else if (request.method === 'DELETE') {
+    const result = await admin.firestore().doc(`news/${request.body.id}`).delete();
+    response.status(200).send(result);
+  } else {
+    response.status(405).json({
+      message: "Method is not allowed here."
+    })
   }
-
 })
 

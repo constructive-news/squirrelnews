@@ -6,6 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { timer } from 'rxjs';
 
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,8 @@ import { timer } from 'rxjs';
 export class AppComponent {
 
   showSplash = true;
-
+  flag = environment.flag;
+  
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
