@@ -2,4 +2,4 @@ export const environment = {
   production: true
 };
 
-export { firebaseConfig } from './firebase';
+export { firebaseConfig } from './environment.firebase';
