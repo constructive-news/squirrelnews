@@ -3,6 +3,19 @@ Squirrel News App Monorepo contains all custom source code to use in the applica
 
 ## Frontend
 
+The Frontend is an Angular Application utilyzing the ionic framework. 
+
+### Auth Credentials 
+
+The App uses Firebase as the backend and the credentials should not be exposed directly via source control. Instead the angular environments are using the following conventions:
+
+1. create a new file *environment.firebase.ts* in 
+
+    src/environtments
+
+and export the firebase configuration from the firebase console in your new file. Dont forget to export that configuration. 
+
+
 ### Angular Fire 
 
 The Frontend uses Angular Fire and is configured in Firebase as a Webapp as we are developing a hybrid solution that is as x-platform as possible. 
@@ -11,7 +24,7 @@ The Frontend uses Angular Fire and is configured in Firebase as a Webapp as we a
 
 We are using Firebase as our Application Cloud Backend. So far we are using 
 
-* Firestore to persist Articles
+* Firestore to persist curated articles
 * Functions to provide an API for third-party-apps to publish curations
 
 ### Runtime Environment for Functions
