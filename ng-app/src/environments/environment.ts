@@ -7,7 +7,7 @@ export const environment = {
   flag: 'dev'
 };
 
-export { firebaseConfig } from './firebase';
+export { firebaseConfig } from './environment.firebase';
 
 /*
  * For easier debugging in development mode, you can import the following file
