@@ -16,6 +16,19 @@ The App uses Firebase as the backend and the credentials should not be exposed d
 and export the firebase configuration from the firebase console in your new file. Dont forget to export that configuration. 
 
 
+### building  and deplying for preview
+
+Use 
+
+    ionic build --configuration=preview
+
+assuming you are in ng-app subfolder: rm all from firebase hosting nd copy new stuff there
+
+    rm -rf ./firebase/public/* 
+    cp www/* ../firebase/public
+    firebase deploy --only hosting
+
+
 ### Angular Fire 
 
 The Frontend uses Angular Fire and is configured in Firebase as a Webapp as we are developing a hybrid solution that is as x-platform as possible. 

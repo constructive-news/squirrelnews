@@ -34,11 +34,11 @@ export class ArticlesService {
       // concatMap( x => x),
       tap(data => console.log('archiv', data)),
       map( (data: Article[]) => {
-        const keys: Set<number> = new Set( data.map( article => article.issue) );
+
         const result = new Map<number, Article[]>();
         data.forEach( item => {
           const value = [...result.get(item.issue) || [], item];
-          result.set(item.issue, value );
+          result.set(item.issue, value.sort( (a, b) => a.position < b.position ? -1 : 1 ) );
         });
         return result;
       }),
