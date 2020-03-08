@@ -13,15 +13,21 @@ import { ArticleDetailComponent } from './article-detail/article-detail.componen
 })
 export class HomePage implements OnInit {
 
-  articles: Observable<Article[]>
+  currentArticles: Observable<Article[]>;
+
+  archive: Map<number, Article[]>;
 
   constructor( 
-    private articalsService: ArticlesService,
+    private articlesService: ArticlesService,
     private modalCtrl: ModalController
   ) {}
 
   ngOnInit() {
-    this.articles = this.articalsService.getArticles()
+    this.currentArticles = this.articlesService.getCurrentIssue();
+    this.articlesService.getArchiveList().subscribe( result => {
+      console.log(result);
+      this.archive = result;
+  });;
   }
 
   async openDetailModal(articleURL: string) {
