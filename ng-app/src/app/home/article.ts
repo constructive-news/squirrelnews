@@ -9,4 +9,5 @@ export interface Article {
   credit: string;
   category?: string;
   issue: number;
+  published: boolean;
 }

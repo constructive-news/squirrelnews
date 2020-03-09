@@ -3,11 +3,10 @@ import { Article } from './article';
 import { Observable, from, concat } from 'rxjs';
 import { filter, toArray, tap, flatMap, concatMap, take, map, distinct, mapTo } from 'rxjs/operators';
 import { AngularFirestore } from '@angular/fire/firestore';
-
+import {  environment } from '../../environments/environment';
 
 @Injectable()
 export class ArticlesService {
-
 
   constructor(
     private db: AngularFirestore
@@ -23,7 +22,9 @@ export class ArticlesService {
       // filter current Issue
       map(data => {
         // get filtered list of current issue by fitlering over the array
-        const filtered = data.filter( (article: Article) => article.issue === currentIssue);
+        const filtered = data.filter( (article: Article) =>
+          environment.flag === 'prod' ? article.issue === currentIssue && article.published
+                                      : article.issue === currentIssue);
         return filtered;
       }),
       tap(data => console.log('current', currentIssue, data)),
