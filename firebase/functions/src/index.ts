@@ -2,20 +2,19 @@ import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 
 interface Article {
+  position: number;
   id: string;
   title: string;
   teaser: string;
   source: string;
   url: string;
-  imageURL: string;
-  credit: string;
-  origin: string;
-  originTitle: string;
-  originTeaser: string;
-  originUrl: string;
-  imageSource: string;
+  date: Date;
+  published: boolean;
+  imageUrl: string;
+  language: string;
   category?: string;
   issue: number;
+  credit: string;
 }
 
 
@@ -25,10 +24,12 @@ const apikey: admin.ServiceAccount = {
   privateKey: functions.config().service_acc.key
 }
 
+
 admin.initializeApp({
   credential: admin.credential.cert(apikey),
   databaseURL: "https://squirrel-news-789fd.firebaseio.com"
 });
+
 
 function ISO8601_week_no(dt: Date) {
   const tdt = new Date(dt.valueOf());
@@ -68,7 +69,7 @@ export const publishCurations = functions.https.onRequest(async (request, respon
           element.issue = ISO8601_week_no(new Date())
 
           const result = await admin.firestore().collection('news').add(element);
-          
+
           response.status(200).json({
             message: `success`,
             inserted: result.id
@@ -86,23 +87,49 @@ export const publishCurations = functions.https.onRequest(async (request, respon
       const requestBody = request.body;
 
       if (requestBody.dry !== undefined && requestBody.dry) {
-        response.status(200).json({
-          message: "dryrun PATCH"
-        });
+        console.log('dryrun')
+          const current = await (await admin.firestore().doc(`news/${requestBody.id}`).get()).data();
+          console.log(current);
+          if (current !== undefined) {
+            current.published = requestBody.action === 'publish' ? true : false;
+            
+            console.log
 
-      } else if (requestBody.articles === undefined || requestBody.articles.length === 0) {
+            response.status(200).json({
+              message: "dryrun PATCH",
+            });
+          } else {
+            response.status(400).json({
+              message: "did not work"
+            })
+          }
+
+                                                          // : await admin.firestore().doc(`news/${requestBody.id}`).set({ published: false});
+          
+
+      } else if (requestBody.id === undefined) {
         response.status(400).send();
 
       } else {
-        requestBody.articles.forEach(async (element: Article) => {
-          admin.firestore().collection('news').where('originTitle', '==', element.originTitle).get().then(
-            (snapshot) => {
-              console.log(snapshot.size);
-            },
-            (err) => { console.error('err', err) }
-          )
-        })
+
+        const current = await (await admin.firestore().doc(`news/${requestBody.id}`).get()).data();
+        if (current !== undefined) {
+          current.published = requestBody.action === 'publish' ? true : false;
+          
+          await admin.firestore().doc(`news/${requestBody.id}`).set(current);
+
+          response.status(200).json({
+            message: "updated",
+          });
+        } else {
+          response.status(400).json({
+            message: "did not work"
+          })
+        }
       }
+    } else {
+
+      response.status(400);
     }
   } else if (request.method === 'DELETE') {
     const result = await admin.firestore().doc(`news/${request.body.id}`).delete();
