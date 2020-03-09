@@ -4,6 +4,7 @@
 
 .wrapper-article {
   width: 100%;
+  height: 85%;
 }
 
 .wrapper-archive {
@@ -16,7 +17,15 @@
   
 }
 
+.header-box {
+  position: absolute;
+  padding: 10px;
+  z-index: 10;
+  display: flex;
+}
 
 .logo-image {
-  padding: 50px;
+  width: 30px;
+  margin-top: 8px;
+  margin-right: 5px;
 }
