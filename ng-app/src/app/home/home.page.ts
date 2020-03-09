@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 
@@ -11,23 +11,29 @@ import { ArticleDetailComponent } from './article-detail/article-detail.componen
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage implements OnInit {
+export class HomePage implements OnInit, OnDestroy {
 
-  currentArticles: Observable<Article[]>;
+  currentArticles: Article[] = [];
 
   archive: Map<number, Article[]>;
 
-  constructor( 
+  constructor(
     private articlesService: ArticlesService,
     private modalCtrl: ModalController
   ) {}
 
   ngOnInit() {
-    this.currentArticles = this.articlesService.getCurrentIssue();
-    this.articlesService.getArchiveList().subscribe( result => {
+    this.articlesService.getCurrentIssue().subscribe( result => {
       console.log(result);
+      this.currentArticles = result;
+    });
+
+    this.articlesService.getArchiveList().subscribe( result => {
       this.archive = result;
-  });;
+  });
+  }
+
+  ngOnDestroy() {
   }
 
   async openDetailModal(articleURL: string) {

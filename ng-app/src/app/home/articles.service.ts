@@ -18,12 +18,17 @@ export class ArticlesService {
   public getCurrentIssue(date: Date = new Date()): Observable<Article[]> {
 
     const currentIssue = this.getISO8601WeekNumber(date);
+    console.log(currentIssue);
     return this.getArticles().pipe(
       // filter current Issue
-      filter(article => article.issue === currentIssue),
+      map(data => {
+        // get filtered list of current issue by fitlering over the array
+        const filtered = data.filter( (article: Article) => article.issue === currentIssue);
+        return filtered;
+      }),
       tap(data => console.log('current', currentIssue, data)),
-      toArray(),
-      tap( data => data.sort( (a, b) => a.position < b.position ? -1 : 1) ),
+      // toArray(),
+      tap( (data: Article[]) => data.sort( (a, b) => a.position < b.position ? -1 : 1) ),
     );
   }
 
@@ -32,7 +37,6 @@ export class ArticlesService {
       // take(1),
       map(actions => actions.map(action => action.payload.doc.data() as Article)),
       // concatMap( x => x),
-      tap(data => console.log('archiv', data)),
       map( (data: Article[]) => {
 
         const result = new Map<number, Article[]>();
@@ -45,23 +49,23 @@ export class ArticlesService {
       );
   }
 
-  public getIssue(issue: number): Observable<Article[]> {
-    return this.getArticles().pipe(
-      filter(article => article.issue === issue),
-      toArray(),
-    );
-  }
+  // public getIssue(issue: number): Observable<Article[]> {
+  //   return this.getArticles().pipe(
+  //     filter(article => article.issue === issue),
+  //     toArray(),
+  //   );
+  // }
 
 
-  private getArticles(date: Date = new Date('yyyy-mm-dd')): Observable<Article> {
+  private getArticles(date: Date = new Date('yyyy-mm-dd')): Observable<Article[]> {
 
     return this.db.collection<Article>('news').valueChanges()
-      .pipe(
+      // .pipe(
         // converting Observable<Article[]> to stream of Article <Article> for further data transformation
-        concatMap(data => data),
-        // there may be more, but only take 7 per issue
-        take(10),
-      );
+        // concatMap(data => data),
+        // there may be more, but only take 10 per issue
+        // take(10),
+      // );
   }
 
 

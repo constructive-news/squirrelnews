@@ -1,25 +1,27 @@
-<ion-content >
+<ion-content>
   <ion-slides pager="true">
-    <ion-slide *ngFor="let article of currentArticles | async" (click)="openDetailModal(article.url)">
-      <div class="wrapper-article">
-        <div class="wrapper-image" 
-        [ngStyle]="{ 
-          'background': 'url(' + article.imageUrl + ') no-repeat top center',
-          'background-size': 'cover'
-        }">
-      </div>
-      <div class="content ion-text-left">
-        <h2>{{ article.title }}</h2>
-        <ion-chip *ngIf="article.source">
-          <ion-label>{{article.source}}</ion-label>
-        </ion-chip>
-        <p>
-          {{ article.teaser }}
-        </p>
-      </div>
-      <!-- <ion-button expand="block" >Read More</ion-button> -->
-    </div>
-    </ion-slide>
+    <ng-container *ngIf="currentArticles.length > 0; else noArticles">
+      <ion-slide *ngFor="let article of currentArticles" (click)="openDetailModal(article.url)">
+        <div class="wrapper-article">
+          <div class="wrapper-image" [ngStyle]="{ 
+              'background': 'url(' + article.imageUrl + ') no-repeat top center',
+              'background-size': 'cover'
+            }">
+          </div>
+          <div class="content ion-text-left">
+            <h2>{{ article.title }}</h2>
+            <ion-chip *ngIf="article.source">
+              <ion-label>{{article.source}}</ion-label>
+            </ion-chip>
+            <p>
+              {{ article.teaser }}
+            </p>
+          </div>
+          <!-- <ion-button expand="block" >Read More</ion-button> -->
+        </div>
+      </ion-slide>
+    </ng-container>
+
     <ion-slide>
       <div class="wrapper-article wrapper-archive">
         <ion-list class="ion-padding">
@@ -32,7 +34,7 @@
             </ion-list-header>
             <ion-item *ngFor="let article of issue.value" (click)="openDetailModal(article.origin)">
               <ion-label>
-               {{article.position}}. {{article.title}}
+                {{article.position}}. {{article.title}}
               </ion-label>
             </ion-item>
           </ng-container>
@@ -41,3 +43,13 @@
     </ion-slide>
   </ion-slides>
 </ion-content>
+
+<ng-template #noArticles>
+  <ion-slide>
+    <div class="wrapper-article">
+      <img class="logo-image" src="assets/icon/squirrel-news-logo.svg" alt="Squirrel News Logo">
+      No current issue :/
+
+    </div>
+  </ion-slide>
+</ng-template>

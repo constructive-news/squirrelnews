@@ -1,5 +1,7 @@
 {
   "name": "squirrelnews-app",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "angular"
 }
