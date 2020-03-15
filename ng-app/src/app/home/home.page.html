@@ -40,7 +40,7 @@
       </ion-slide>
     </ng-container>
 
-    <ion-slide>
+    <!-- <ion-slide>
       <div class="wrapper-article wrapper-archive">
         <ion-list class="ion-padding">
           <ion-text color="secondary">
@@ -50,7 +50,7 @@
             <ion-list-header>
               Ausgabe {{issue.key}}
             </ion-list-header>
-            <ion-item *ngFor="let article of issue.value" (click)="openDetailModal(article.origin)">
+            <ion-item *ngFor="let article of issue.value" (click)="openBrowser(article.origin)">
               <ion-label>
                 {{article.position}}. {{article.title}}
               </ion-label>
@@ -58,7 +58,7 @@
           </ng-container>
         </ion-list>
       </div>
-    </ion-slide>
+    </ion-slide> -->
   </ion-slides>
 </ion-content>
 
