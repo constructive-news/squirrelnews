@@ -36,7 +36,6 @@ export class TabsPage implements OnInit, OnDestroy {
   }
 
   async handleShareTapped() {
-    console.log('tapped');
     await Share.share({
       dialogTitle: 'Nachricht teilen mit...',
       title: 'Nachricht teilen mit...',

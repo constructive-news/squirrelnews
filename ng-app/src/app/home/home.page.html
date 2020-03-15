@@ -15,7 +15,7 @@
   <ion-slides #articleSlider pager="true"
     (ionSlideDidChange)="handleSlideChange()">
     <ng-container *ngIf="currentArticles.length > 0; else noArticles">
-      <ion-slide *ngFor="let article of currentArticles">
+      <ion-slide *ngFor="let article of currentArticles" (click)="openBrowser()">
         <div class="wrapper-article">
           <div class="wrapper-image" [ngStyle]="{ 
               'background': 'url(' + article.imageUrl + ') no-repeat top center',

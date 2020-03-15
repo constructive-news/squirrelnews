@@ -8,6 +8,7 @@ import { ArticleDetailComponent } from './article-detail/article-detail.componen
 
 import { Plugins } from '@capacitor/core';
 import { StateService } from '../shared/state.service';
+import { tap } from 'rxjs/operators';
 const { Browser } = Plugins;
 @Component({
   selector: 'app-home',
@@ -22,10 +23,10 @@ export class HomePage implements OnInit, OnDestroy {
   currentArticles: Article[] = [];
 
   archive: Map<number, Article[]>;
+  url: string = null;
 
   constructor(
     private articlesService: ArticlesService,
-    private modalCtrl: ModalController,
     private state: StateService
   ) {}
 
@@ -37,7 +38,13 @@ export class HomePage implements OnInit, OnDestroy {
 
     this.articlesService.getArchiveList().subscribe( result => {
       this.archive = result;
-  });
+    });
+
+    this.state.activeSlide
+    // .pipe(
+    //   tap( xx => console.log('url for browser', xx) )
+    // )
+    .subscribe( slide => this.url = slide ? slide.url : '');
   }
 
   ngOnDestroy() {
@@ -49,20 +56,9 @@ export class HomePage implements OnInit, OnDestroy {
     this.state.activeSlide.next(this.currentArticles[index]);
   }
 
-  async openDetailModal(articleURL: string) {
-    console.log(articleURL);
-    const modal = await this.modalCtrl.create({
-      component: ArticleDetailComponent,
-      componentProps: {
-        url: articleURL
-      }
-    });
-
-    return await modal.present();
-  }
-
   async openBrowser() {
-    await Browser.open({ url: 'this.url' });
+    console.log('open browser', this.url);
+    await Browser.open({ url: this.url });
   }
 
 }
