@@ -19,7 +19,7 @@ import { SplashScreenComponent } from './components/splash-screen/splash-screen.
   entryComponents: [],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(),
+    IonicModule.forRoot({ mode: 'ios'}),
     AppRoutingModule,
   ],
   providers: [

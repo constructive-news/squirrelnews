@@ -1,6 +1,13 @@
-.content {
-  padding: 0 10px;
+ion-slides {
+  top: -60px
 }
+
+
+.content {
+  padding: 0 10px 20px 10px;
+  // margin-bottom: 20px;
+}
+
 
 .wrapper-article {
   width: 100%;
@@ -15,6 +22,21 @@
   width: 100%;
   height: 55vh;
   
+  
+}
+
+.photo-credit {
+  display:inline-block;
+  position: absolute;
+  writing-mode: vertical-rl;
+  text-orientation: sideways !important;
+  text-align: end;
+  top: 30vh;
+  left: 92vw;
+  color: #fff;
+  transform: rotate(180deg);
+  text-overflow: ellipsis;
+  width: 100px;
 }
 
 .header-box {
@@ -28,4 +50,9 @@
   width: 30px;
   margin-top: 8px;
   margin-right: 5px;
+}
+
+.title {
+  text-align: left;
+  width: 60px;
 }

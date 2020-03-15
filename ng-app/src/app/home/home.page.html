@@ -1,16 +1,29 @@
-<div class="header-box">
+<!-- <div class="header-box">
   <img src="assets/icon/squirrel-news-logo.svg" class="logo-image">
   <h1>Squirrel News</h1>
-</div>
-<ion-content>
-  <ion-slides pager="true">
+</div> -->
+<ion-header> 
+  <ion-toolbar>
+    <ion-title slot="start">
+      <span class="title">
+        Squirrel News
+      </span>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content fullscreen>
+  <ion-slides #articleSlider pager="true"
+    (ionSlideDidChange)="handleSlideChange()">
     <ng-container *ngIf="currentArticles.length > 0; else noArticles">
-      <ion-slide *ngFor="let article of currentArticles" (click)="openDetailModal(article.url)">
+      <ion-slide *ngFor="let article of currentArticles">
         <div class="wrapper-article">
           <div class="wrapper-image" [ngStyle]="{ 
               'background': 'url(' + article.imageUrl + ') no-repeat top center',
               'background-size': 'cover'
             }">
+            <div class="photo-credit">
+              Foto: {{article.credit}}
+            </div>
           </div>
           <div class="content ion-text-left">
             <h2>{{ article.title }}</h2>
@@ -19,6 +32,7 @@
             </ion-chip>
             <p>
               {{ article.teaser }}
+              Mehr...
             </p>
           </div>
           <!-- <ion-button expand="block" >Read More</ion-button> -->
