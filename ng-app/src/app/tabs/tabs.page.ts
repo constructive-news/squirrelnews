@@ -46,9 +46,10 @@ export class TabsPage implements OnInit, OnDestroy {
 
   async handleShareTapped() {
     await Share.share({
-      dialogTitle: 'Nachricht teilen mit...',
-      title: 'Nachricht teilen mit...',
+      dialogTitle: 'Nachricht teilen...',
+      title: 'Nachricht teilen...',
       url: this.url,
+      text: 'Schau dir das mal an'
     }).catch(err => {
       this.noSharingOptionsAvailable();
     });
