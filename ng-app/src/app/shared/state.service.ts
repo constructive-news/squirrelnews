@@ -8,6 +8,7 @@ import { Article } from '../home/article';
 export class StateService {
 
   public activeSlide: BehaviorSubject<Article> = new BehaviorSubject(null);
+  public activeTab: BehaviorSubject<string> = new BehaviorSubject(null);
 
   constructor() { }
 

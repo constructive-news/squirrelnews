@@ -1,7 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef, AfterViewInit, AfterContentInit } from '@angular/core';
 import { Plugins } from '@capacitor/core';
 import { StateService } from '../shared/state.service';
-import { ToastController } from '@ionic/angular';
+import { ToastController, IonTabs } from '@ionic/angular';
 import { tap } from 'rxjs/operators';
 
 const { Share, Storage } = Plugins;
@@ -12,12 +12,14 @@ const { Share, Storage } = Plugins;
 })
 export class TabsPage implements OnInit, OnDestroy {
 
+  @ViewChild('tabs') tabs: IonTabs;
+
   url: string = null;
   title: string = null;
 
   favorites: string[];
-
   favorite: boolean;
+  activeTab: string;
 
   constructor(
     private state: StateService,
@@ -34,14 +36,28 @@ export class TabsPage implements OnInit, OnDestroy {
         this.url = slide ? slide.url : '';
         this.title = slide ? slide.title : '';
 
-        this.checkFav().then( result => this.favorite = result );
+        this.checkFav().then(result => this.favorite = result);
 
       });
-
+    this.state.activeTab.subscribe(tab => {
+      this.activeTab = tab;
+      if (this.activeTab !== 'home') {
+        this.favorite = false;
+      } else {
+        this.checkFav().then(result => this.favorite = result);
+      }
+    });
   }
 
   ngOnDestroy() {
     this.state.activeSlide.unsubscribe();
+    this.state.activeTab.unsubscribe();
+  }
+
+  handleTabSwitch() {
+
+    // this.favorite = this.activeTab !== 'home' ? false;
+    this.state.activeTab.next(this.tabs.getSelected());
   }
 
   async handleShareTapped() {
@@ -59,11 +75,12 @@ export class TabsPage implements OnInit, OnDestroy {
     this.setFavorite();
   }
 
+
   private async checkFav() {
     const favs: { titles: string[] } = await this.getFavorites();
     console.log('favs', favs, 'active', this.title);
     return favs ? favs.titles.filter(item => item === this.title).length > 0 ? true : false
-                : false;
+      : false;
 
   }
 
@@ -80,7 +97,7 @@ export class TabsPage implements OnInit, OnDestroy {
           index = i;
         }
       });
-      
+
       console.log('set Favorite', favs, this.title, index);
       index < 0 ? favs.push(this.title)
         : favs.splice(index, 1);
@@ -92,7 +109,7 @@ export class TabsPage implements OnInit, OnDestroy {
         value: JSON.stringify({ titles: favs })
       }).then(
         () => {
-          this.checkFav().then( result => this.favorite = result );
+          this.checkFav().then(result => this.favorite = result);
         }
       );
     });

@@ -1,4 +1,4 @@
-<ion-tabs>
+<ion-tabs #tabs (ionTabsDidChange)="handleTabSwitch()">
   <ion-tab-bar slot="bottom">
     <ion-tab-button tab="home">
       <ion-icon name="home-outline"></ion-icon>
@@ -6,11 +6,11 @@
       <!-- <ion-badge>6</ion-badge> -->
     </ion-tab-button>
 
-    <ion-tab-button (click)="handleShareTapped()">
+    <ion-tab-button (click)="handleShareTapped()" [disabled]="activeTab !== 'home'" >
       <ion-icon name="share-social-outline"></ion-icon>
     </ion-tab-button>
 
-    <ion-tab-button (click)="handleHeartTapped()">
+    <ion-tab-button (click)="handleHeartTapped()" [disabled]="activeTab !== 'home'">
       <ion-icon *ngIf="favorite" name="heart"></ion-icon>
       <ion-icon *ngIf="!favorite" name="heart-outline"></ion-icon>
     </ion-tab-button>
