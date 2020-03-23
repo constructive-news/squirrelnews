@@ -17,18 +17,20 @@ export class ArticlesService {
   public getCurrentIssue(date: Date = new Date()): Observable<Article[]> {
 
     const currentIssue = this.getISO8601WeekNumber(date);
+    const today = new Date();
     console.log(currentIssue);
     return this.getArticles().pipe(
       // filter current Issue
-      map(data => {
+      flatMap(data => {
         // get filtered list of current issue by fitlering over the array
         const filtered = data.filter( (article: Article) =>
-          environment.flag === 'prod' ? article.issue === currentIssue && article.published
-                                      : article.issue === currentIssue);
+          environment.flag === 'prod' ? article.published
+                                      : true);
         return filtered;
       }),
+      take(10),
       tap(data => console.log('current', currentIssue, data)),
-      // toArray(),
+      toArray(),
       tap( (data: Article[]) => data.sort( (a, b) => a.position < b.position ? -1 : 1) ),
     );
   }
