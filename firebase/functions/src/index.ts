@@ -13,7 +13,8 @@ interface Article {
   imageUrl: string;
   language: string;
   category?: string;
-  issue: number;
+  issue: string;
+  issueWeek: number;
   credit: string;
 }
 
@@ -66,7 +67,7 @@ export const publishCurations = functions.https.onRequest(async (request, respon
       } else {
         await requestBody.articles.forEach(async (element: Article) => {
 
-          element.issue = ISO8601_week_no(new Date())
+          element.issueWeek = ISO8601_week_no(new Date())
 
           const result = await admin.firestore().collection('news').add(element);
 
@@ -93,8 +94,6 @@ export const publishCurations = functions.https.onRequest(async (request, respon
           if (current !== undefined) {
             current.published = requestBody.action === 'publish' ? true : false;
             
-            console.log
-
             response.status(200).json({
               message: "dryrun PATCH",
             });

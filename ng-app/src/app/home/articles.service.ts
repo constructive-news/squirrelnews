@@ -1,15 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Article } from './article';
-import { Observable, from, concat } from 'rxjs';
+import { Observable, from, concat, of } from 'rxjs';
 import { filter, toArray, tap, flatMap, concatMap, take, map, distinct, mapTo } from 'rxjs/operators';
 import { AngularFirestore } from '@angular/fire/firestore';
 import {  environment } from '../../environments/environment';
+import { FavoritesService } from '../shared/favorites.service';
+import { Plugins } from '@capacitor/core';
 
+const { Storage } = Plugins;
 @Injectable()
 export class ArticlesService {
 
   constructor(
-    private db: AngularFirestore
+    private db: AngularFirestore,
   ) { }
 
 
@@ -29,7 +32,7 @@ export class ArticlesService {
         return filtered;
       }),
       take(10),
-      tap(data => console.log('current', currentIssue, data)),
+      // tap(data => console.log('current', currentIssue, data)),
       toArray(),
       tap( (data: Article[]) => data.sort( (a, b) => a.position < b.position ? -1 : 1) ),
     );
@@ -50,6 +53,11 @@ export class ArticlesService {
         return result;
       }),
       );
+  }
+
+  public getFavorites() {
+    return concat(this.getArticles(), of(Storage.get({key: 'favorites'})))
+      .pipe();
   }
 
   // public getIssue(issue: number): Observable<Article[]> {
