@@ -19,9 +19,6 @@ export class ArticlesService {
   /** returns articles from current issue */
   public getCurrentIssue(date: Date = new Date()): Observable<Article[]> {
 
-    const currentIssue = this.getISO8601WeekNumber(date);
-    const today = new Date();
-    console.log(currentIssue);
     return this.getArticles().pipe(
       // filter current Issue
       flatMap(data => {
@@ -32,7 +29,6 @@ export class ArticlesService {
         return filtered;
       }),
       take(10),
-      // tap(data => console.log('current', currentIssue, data)),
       toArray(),
       tap( (data: Article[]) => data.sort( (a, b) => a.position < b.position ? -1 : 1) ),
     );
@@ -40,9 +36,7 @@ export class ArticlesService {
 
   public getArchiveList() {
     return this.db.collection<Article>('news').snapshotChanges().pipe(
-      // take(1),
       map(actions => actions.map(action => action.payload.doc.data() as Article)),
-      // concatMap( x => x),
       map( (data: Article[]) => {
 
         const result = new Map<number, Article[]>();
@@ -60,23 +54,10 @@ export class ArticlesService {
       .pipe();
   }
 
-  // public getIssue(issue: number): Observable<Article[]> {
-  //   return this.getArticles().pipe(
-  //     filter(article => article.issue === issue),
-  //     toArray(),
-  //   );
-  // }
-
-
   private getArticles(date: Date = new Date('yyyy-mm-dd')): Observable<Article[]> {
 
-    return this.db.collection<Article>('news').valueChanges()
-      // .pipe(
-        // converting Observable<Article[]> to stream of Article <Article> for further data transformation
-        // concatMap(data => data),
-        // there may be more, but only take 10 per issue
-        // take(10),
-      // );
+    return this.db.collection<Article>('news', ref => ref.orderBy('date', 'desc'))
+      .valueChanges();
   }
 
 
