@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-more',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MorePage implements OnInit {
 
-  constructor() { }
+  constructor(private nav: NavController) { }
 
   ngOnInit() {
   }
 
+  openAll() {
+    this.nav.navigateForward('tabs/more/all');
+  }
+
+  openPrevious() {
+    this.nav.navigateForward('tabs/more/previous');
+  }
+  
+  openFavorites() {
+    this.nav.navigateForward('tabs/more/favorites');
+  }
 }

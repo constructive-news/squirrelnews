@@ -8,21 +8,24 @@
   <ion-grid style="margin-top: 40%;">
     <ion-row></ion-row>
     <ion-row>
-      <ion-col size="8" offset="2" class="ion-align-self-center">
+      <ion-col size="8" offset="2" class="ion-align-self-center"
+      (click)="openAll()">
         <h2>
           Alle Ausgaben
         </h2>
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col size="8" offset="2" class="ion-align-self-center">
+      <ion-col size="8" offset="2" class="ion-align-self-center"
+      (click)="openPrevious()" >
         <h2>
           Vorherige Ausgabe
         </h2>
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col size="8" offset="2">
+      <ion-col size="8" offset="2"
+      (click)="openFavorites()">
         <h2>
           Meine Favoriten
         </h2>
