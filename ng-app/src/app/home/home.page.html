@@ -1,7 +1,3 @@
-<!-- <div class="header-box">
-  <img src="assets/icon/squirrel-news-logo.svg" class="logo-image">
-  <h1>Squirrel News</h1>
-</div> -->
 <ion-header> 
   <ion-toolbar class="home">
     <ion-title slot="start">
@@ -16,49 +12,9 @@
     (ionSlideDidChange)="handleSlideChange()">
     <ng-container *ngIf="currentArticles.length > 0; else noArticles">
       <ion-slide *ngFor="let article of currentArticles" (click)="openBrowser()">
-        <div class="wrapper-article">
-          <div class="wrapper-image" [ngStyle]="{ 
-              'background': 'url(' + article.imageUrl + ') no-repeat top center',
-              'background-size': 'cover'
-            }">
-            <div class="photo-credit">
-              Foto: {{article.credit}}
-            </div>
-          </div>
-          <div class="content ion-text-left">
-            <h2>{{ article.title }}</h2>
-            <ion-chip *ngIf="article.source">
-              <ion-label>{{article.source}}</ion-label>
-            </ion-chip>
-            <p>
-              {{ article.teaser }}
-              Mehr...
-            </p>
-          </div>
-          <!-- <ion-button expand="block" >Read More</ion-button> -->
-        </div>
+        <app-article [article]="article"></app-article>
       </ion-slide>
     </ng-container>
-
-    <!-- <ion-slide>
-      <div class="wrapper-article wrapper-archive">
-        <ion-list class="ion-padding">
-          <ion-text color="secondary">
-            <h1>Archiv</h1>
-          </ion-text>
-          <ng-container *ngFor="let issue of archive | keyvalue">
-            <ion-list-header>
-              Ausgabe {{issue.key}}
-            </ion-list-header>
-            <ion-item *ngFor="let article of issue.value" (click)="openBrowser(article.origin)">
-              <ion-label>
-                {{article.position}}. {{article.title}}
-              </ion-label>
-            </ion-item>
-          </ng-container>
-        </ion-list>
-      </div>
-    </ion-slide> -->
   </ion-slides>
 </ion-content>
 

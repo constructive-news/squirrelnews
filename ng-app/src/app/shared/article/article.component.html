@@ -1,0 +1,21 @@
+<div class="wrapper-article">
+  <div class="wrapper-image" [ngStyle]="{ 
+      'background': 'url(' + article.imageUrl + ') no-repeat top center',
+      'background-size': 'cover'
+    }">
+    <div class="photo-credit">
+      Foto: {{article.credit}}
+    </div>
+  </div>
+  <div class="content ion-text-left">
+    <h2>{{ article.title }}</h2>
+    <ion-chip *ngIf="article.source">
+      <ion-label>{{article.source}}</ion-label>
+    </ion-chip>
+    <p>
+      {{ article.teaser }}
+      Mehr...
+    </p>
+  </div>
+  <!-- <ion-button expand="block" >Read More</ion-button> -->
+</div>

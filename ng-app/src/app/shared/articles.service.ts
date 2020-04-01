@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Article } from './article';
-import { Observable, from, concat, of } from 'rxjs';
-import { filter, toArray, tap, flatMap, concatMap, take, map, distinct, mapTo } from 'rxjs/operators';
+import { Article } from '../home/article';
+import { Observable, from, concat, of, combineLatest, forkJoin } from 'rxjs';
+import { filter, toArray, tap, flatMap, concatMap, take, map, distinct, mapTo, combineAll } from 'rxjs/operators';
 import { AngularFirestore } from '@angular/fire/firestore';
 import {  environment } from '../../environments/environment';
-import { FavoritesService } from '../shared/favorites.service';
 import { Plugins } from '@capacitor/core';
 
 const { Storage } = Plugins;
@@ -38,7 +37,6 @@ export class ArticlesService {
     return this.db.collection<Article>('news').snapshotChanges().pipe(
       map(actions => actions.map(action => action.payload.doc.data() as Article)),
       map( (data: Article[]) => {
-
         const result = new Map<number, Article[]>();
         data.forEach( item => {
           const value = [...result.get(item.issue) || [], item];
@@ -47,11 +45,19 @@ export class ArticlesService {
         return result;
       }),
       );
-  }
+    }
 
-  public getFavorites() {
-    return concat(this.getArticles(), of(Storage.get({key: 'favorites'})))
-      .pipe();
+    public getFavorites() {
+      return combineLatest([this.db.collection<Article>('news').snapshotChanges(), from(Storage.get({key: 'favorites'}))])
+      .pipe(
+        map( ( [actions, favorites]) => [actions.map(action => action.payload.doc.data() as Article), JSON.parse(favorites.value) ]),
+        map( ( data ) => {
+          const articles = data[0];
+          const favorites = data[1];
+          return articles.filter( article => favorites.titles.includes(article.title));
+        }),
+        tap( data => console.log(data)),
+      );
   }
 
   private getArticles(date: Date = new Date('yyyy-mm-dd')): Observable<Article[]> {

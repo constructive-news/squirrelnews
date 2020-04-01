@@ -6,11 +6,11 @@
       <!-- <ion-badge>6</ion-badge> -->
     </ion-tab-button>
 
-    <ion-tab-button (click)="handleShareTapped()" [disabled]="activeTab !== 'home'" >
+    <ion-tab-button (click)="handleShareTapped()" [disabled]="!this.ACTIVE_TABS.includes(this.activeTab)" >
       <ion-icon name="share-social-outline"></ion-icon>
     </ion-tab-button>
 
-    <ion-tab-button (click)="handleHeartTapped()" [disabled]="activeTab !== 'home'">
+    <ion-tab-button (click)="handleHeartTapped()" [disabled]="!this.ACTIVE_TABS.includes(this.activeTab)">
       <ion-icon *ngIf="favorite" name="heart"></ion-icon>
       <ion-icon *ngIf="!favorite" name="heart-outline"></ion-icon>
     </ion-tab-button>

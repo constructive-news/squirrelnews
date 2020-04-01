@@ -4,10 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { FavoritesPageRoutingModule } from './favorites-routing.module';
+import { FavoriteDetailPageRoutingModule } from './favorite-detail-routing.module';
 
-import { FavoritesPage } from './favorites.page';
-import { ArticlesService } from 'src/app/shared/articles.service';
+import { FavoriteDetailPage } from './favorite-detail.page';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
@@ -16,9 +15,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
     FormsModule,
     IonicModule,
     SharedModule,
-    FavoritesPageRoutingModule
+    FavoriteDetailPageRoutingModule
   ],
-  declarations: [FavoritesPage],
-  providers: [ ArticlesService ]
+  declarations: [FavoriteDetailPage]
 })
-export class FavoritesPageModule {}
+export class FavoriteDetailPageModule {}

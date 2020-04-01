@@ -3,6 +3,7 @@ import { Plugins } from '@capacitor/core';
 import { StateService } from '../shared/state.service';
 import { ToastController, IonTabs } from '@ionic/angular';
 import { tap } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
 
 const { Share, Storage } = Plugins;
 @Component({
@@ -20,10 +21,12 @@ export class TabsPage implements OnInit, OnDestroy {
   favorites: string[];
   favorite: boolean;
   activeTab: string;
+  ACTIVE_TABS = ['home', 'fav'];
 
   constructor(
     private state: StateService,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private route: ActivatedRoute
   ) { }
 
 
@@ -40,11 +43,12 @@ export class TabsPage implements OnInit, OnDestroy {
 
       });
     this.state.activeTab.subscribe(tab => {
+      console.log('active tab', tab);
       this.activeTab = tab;
-      if (this.activeTab !== 'home') {
-        this.favorite = false;
-      } else {
+      if ( this.ACTIVE_TABS.includes(this.activeTab)) {
         this.checkFav().then(result => this.favorite = result);
+      } else {
+        this.favorite = false;
       }
     });
   }

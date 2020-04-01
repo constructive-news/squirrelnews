@@ -7,7 +7,11 @@ const routes: Routes = [
   {
     path: '',
     component: FavoritesPage
-  }
+  },
+  {
+    path: ':title',
+    loadChildren: () => import('./favorite-detail/favorite-detail.module').then( m => m.FavoriteDetailPageModule)
+  },
 ];
 
 @NgModule({

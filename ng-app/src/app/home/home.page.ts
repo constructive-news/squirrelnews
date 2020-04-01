@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { ModalController, IonSlides } from '@ionic/angular';
 import { Observable } from 'rxjs';
 
-import { ArticlesService } from './articles.service';
+import { ArticlesService } from '../shared/articles.service';
 import { Article } from './article';
 import { ArticleDetailComponent } from './article-detail/article-detail.component';
 

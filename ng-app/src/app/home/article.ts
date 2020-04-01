@@ -5,7 +5,7 @@ export interface Article {
   teaser: string;
   source: string;
   url: string;
-  imageURL: string;
+  imageUrl: string;
   credit: string;
   category?: string;
   issue: number;

@@ -20,7 +20,7 @@ export class MorePage implements OnInit {
   openPrevious() {
     this.nav.navigateForward('tabs/more/previous');
   }
-  
+
   openFavorites() {
     this.nav.navigateForward('tabs/more/favorites');
   }
