@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
+import { StateService } from '../shared/state.service';
 
 @Component({
   selector: 'app-more',
@@ -8,9 +9,16 @@ import { NavController } from '@ionic/angular';
 })
 export class MorePage implements OnInit {
 
-  constructor(private nav: NavController) { }
+  constructor(
+    private nav: NavController,
+    private state: StateService
+  ) { }
 
   ngOnInit() {
+  }
+
+  ionViewDidEnter() {
+    this.state.activeTab.next('more');
   }
 
   openAll() {

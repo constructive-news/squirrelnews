@@ -1,28 +1,24 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { ModalController, IonSlides } from '@ionic/angular';
-import { Observable } from 'rxjs';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { IonSlides } from '@ionic/angular';
 
 import { ArticlesService } from '../shared/articles.service';
 import { Article } from './article';
-import { ArticleDetailComponent } from './article-detail/article-detail.component';
 
 import { Plugins } from '@capacitor/core';
 import { StateService } from '../shared/state.service';
-import { tap } from 'rxjs/operators';
 const { Browser } = Plugins;
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage implements OnInit, OnDestroy {
+export class HomePage implements OnInit {
 
 
   @ViewChild('articleSlider') slider: IonSlides;
 
   currentArticles: Article[] = [];
 
-  archive: Map<number, Article[]>;
   url: string = null;
 
   constructor(
@@ -36,19 +32,8 @@ export class HomePage implements OnInit, OnDestroy {
       this.state.activeSlide.next(this.currentArticles[0]);
     });
 
-    this.articlesService.getArchiveList().subscribe( result => {
-      this.archive = result;
-    });
-
     this.state.activeSlide
-    // .pipe(
-    //   tap( xx => console.log('url for browser', xx) )
-    // )
     .subscribe( slide => this.url = slide ? slide.url : '');
-  }
-
-  ngOnDestroy() {
-    
   }
 
   async handleSlideChange( ) {

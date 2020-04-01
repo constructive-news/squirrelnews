@@ -1,9 +1,17 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>previous</ion-title>
+    <ion-title>Vorherige Artikel</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
+  <ion-slides #articleSlider pager="true"
+    (ionSlideDidChange)="handleSlideChange()">
+    <ng-container *ngIf="articles.length > 0">
+      <ion-slide *ngFor="let article of articles" (click)="openBrowser()">
+        <app-article [article]="article"></app-article>
+      </ion-slide>
+    </ng-container>
+  </ion-slides>
 </ion-content>

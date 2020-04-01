@@ -13,7 +13,6 @@ export class ArticleDetailPage implements OnInit {
   article: Article;
 
   constructor(
-    private route: ActivatedRoute,
     private router: Router,
     private state: StateService
   ) { }
