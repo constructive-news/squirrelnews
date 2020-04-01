@@ -34,7 +34,7 @@ export class ArticlesService {
   }
 
   public getArchiveList() {
-    return this.db.collection<Article>('news').snapshotChanges().pipe(
+    return this.db.collection<Article>('news', ref => ref.orderBy('issue', 'asc')).snapshotChanges().pipe(
       map(actions => actions.map(action => action.payload.doc.data() as Article)),
       map( (data: Article[]) => {
         const result = new Map<number, Article[]>();

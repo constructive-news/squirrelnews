@@ -21,7 +21,7 @@ export class TabsPage implements OnInit, OnDestroy {
   favorites: string[];
   favorite: boolean;
   activeTab: string;
-  ACTIVE_TABS = ['home', 'fav'];
+  ACTIVE_TABS = ['home', 'fav', 'all'];
 
   constructor(
     private state: StateService,

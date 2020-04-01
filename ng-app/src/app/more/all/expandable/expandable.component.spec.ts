@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { ArchivePage } from './archive.page';
+import { ExpandableComponent } from './expandable.component';
 
-describe('ArchivePage', () => {
-  let component: ArchivePage;
-  let fixture: ComponentFixture<ArchivePage>;
+describe('ExpandableComponent', () => {
+  let component: ExpandableComponent;
+  let fixture: ComponentFixture<ExpandableComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ArchivePage ],
+      declarations: [ ExpandableComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ArchivePage);
+    fixture = TestBed.createComponent(ExpandableComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));
