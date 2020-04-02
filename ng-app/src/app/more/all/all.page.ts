@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Article } from 'src/app/home/article';
 import { map } from 'rxjs/operators';
 import { NavController } from '@ionic/angular';
+import { StateService } from 'src/app/shared/state.service';
 
 @Component({
   selector: 'app-all',
@@ -15,7 +16,8 @@ export class AllPage implements OnInit {
   articles$: Map<number, { articles: Article[], expanded: boolean}>;
   constructor(
     private nav: NavController,
-    public articles: ArticlesService
+    public articles: ArticlesService,
+    private state: StateService
   ) { }
 
   ngOnInit() {
@@ -42,5 +44,9 @@ export class AllPage implements OnInit {
 
   openDetails(article) {
     this.nav.navigateForward(`tabs/more/all/${article.title}`, { state: article });
+  }
+
+  handleBack() {
+    this.state.activeTab.next('more');
   }
 }
