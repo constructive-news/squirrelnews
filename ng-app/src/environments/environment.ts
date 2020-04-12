@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  flag: 'dev'
+  flag: 'dev',
+  defaultLang: 'en'
 };
 
 export { firebaseConfig } from './environment.firebase';

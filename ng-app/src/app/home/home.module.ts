@@ -18,8 +18,20 @@ import { SharedModule } from '../shared/shared.module';
       {
         path: '',
         component: HomePage
+      },
+      {
+      path: 'previous',
+      loadChildren: () => import('../shared/previous/previous.module').then( m => m.PreviousPageModule)
+      },
+      {
+        path: 'favorites',
+        loadChildren: () => import('../shared/favorites/favorites.module').then( m => m.FavoritesPageModule)
+      },
+      {
+        path: 'all',
+        loadChildren: () => import('../shared/all/all.module').then( m => m.AllPageModule)
       }
-    ]),
+    ])
   ],
   declarations: [HomePage, ArticleDetailComponent],
   entryComponents: [ArticleDetailComponent],

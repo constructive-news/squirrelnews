@@ -1,0 +1,19 @@
+<ion-slides #articleSlider (ionSlideDidChange)="handleSlideChange()">
+  <ng-container *ngIf="articles.length > 0; else noArticles">
+    <ion-slide *ngFor="let article of articles" (click)="openBrowser(article.url)">
+      <app-article [article]="article"></app-article>
+    </ion-slide>
+  </ng-container>
+  <ion-slide *ngIf="hasMore">
+    <app-more></app-more>
+  </ion-slide>  
+</ion-slides>
+
+<ng-template #noArticles>
+  <ion-slide>
+    <div class="wrapper-article">
+      <img class="logo-image" src="assets/icon/squirrel-news-logo.svg" alt="Squirrel News Logo">
+      No current issue :/
+    </div>
+  </ion-slide>
+</ng-template>

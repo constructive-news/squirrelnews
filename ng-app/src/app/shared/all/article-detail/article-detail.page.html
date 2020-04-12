@@ -1,10 +1,12 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button 
+      <ion-back-button
+      icon="arrow-back-outline"
+      text=""
         (click)="handleBack()"></ion-back-button>
     </ion-buttons>
-    <ion-title>Alle Artikel</ion-title>
+    <ion-title>{{ 'issues.all' | translate | async }}</ion-title>
   </ion-toolbar>
 </ion-header>
 

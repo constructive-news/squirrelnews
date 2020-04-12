@@ -1,8 +1,10 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Alle Ausgaben</ion-title>
+    <ion-title>{{ 'issues.all' | translate | async }}</ion-title>
     <ion-buttons slot="start">
-      <ion-back-button 
+      <ion-back-button
+        icon="arrow-back-outline"
+        text=""
         (click)="handleBack()"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
@@ -14,7 +16,7 @@
     <ion-item *ngFor="let issue of articles$ | keyvalue">
       <ion-label> 
         <h2 (click)="expand(issue.key)">
-          Ausgabe: {{ issue.key }}
+          {{ issue.key }}
         </h2>
         <app-expandable expandHeight="150px" [expanded]=" issue.value.expanded">
           <div *ngFor="let article of issue.value.articles">

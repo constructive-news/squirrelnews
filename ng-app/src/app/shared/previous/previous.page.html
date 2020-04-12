@@ -1,11 +1,10 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Vorherige Artikel</ion-title>
+    <ion-title>{{ 'issues.favorites' | translate | async }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
   <ion-slides #articleSlider pager="true"
     (ionSlideDidChange)="handleSlideChange()">
     <ng-container *ngIf="articles.length > 0">

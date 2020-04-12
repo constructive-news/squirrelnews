@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Article } from '../home/article';
-import { Observable, from, concat, of, combineLatest, forkJoin } from 'rxjs';
-import { filter, toArray, tap, flatMap, concatMap, take, map, distinct, mapTo, combineAll, skip } from 'rxjs/operators';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { Observable, from, concat, of, combineLatest, forkJoin, zip } from 'rxjs';
+import { filter, toArray, tap, flatMap, concatMap, take, map, distinct, mapTo, combineAll, skip, withLatestFrom } from 'rxjs/operators';
+import { AngularFirestore, DocumentChangeAction } from '@angular/fire/firestore';
 import { environment } from '../../environments/environment';
 import { Plugins } from '@capacitor/core';
+import { StateService } from './state.service';
 
 const { Storage } = Plugins;
 @Injectable()
@@ -12,38 +13,62 @@ export class ArticlesService {
 
   constructor(
     private db: AngularFirestore,
+    private state: StateService
   ) { }
 
 
   /** returns articles from current issue */
-  public getCurrentIssue(date: Date = new Date()): Observable<Article[]> {
+  public getCurrentIssue(): Observable<Article[]> {
 
-    return this.getArticles().pipe(
+    return zip(
+      this.state.activeLang,
+      this.db.collection<Article>('news', ref => ref
+      .where( 'language', '==', this.state.activeLang.value)
+      .orderBy('date', 'desc'))
+      .valueChanges()).pipe(
       // filter current Issue
-      flatMap(data => {
+      tap(data => console.log('value', data)),
+      map( ([lang, data]) => data),
+      // map( (actions: DocumentChangeAction<Article>[]) => actions.map(action => action.payload.doc.data() as Article)),
+      // tap(data => console.log('just data', data)),
+      map(data => {
         // get filtered list of current issue by fitlering over the array
-        const filtered = data.filter((article: Article) =>
-          environment.flag === 'prod' ? article.published
-            : true);
+        let i = 0;
+        const filtered = data.filter((article) => {
+          let result = false;
+          if( i < 10) {
+
+            result = environment.flag === 'prod' ? article.published : true;
+            if (result) {
+              i++;
+            }
+          }
+
+          return result;
+        });
         return filtered;
       }),
       take(10),
-      toArray(),
+      // toArray(),
       tap((data: Article[]) => data.sort((a, b) => a.position < b.position ? -1 : 1)),
+      tap(data => console.log('current', data) ),
     );
   }
 
   public getArchiveList() {
-    return this.db.collection<Article>('news', ref => ref.orderBy('issue', 'asc')).snapshotChanges().pipe(
+    return this.db.collection<Article>('news', ref => ref
+      .where( 'language', '==', this.state.activeLang.value)
+      .orderBy('issue', 'asc')).snapshotChanges().pipe(
       map(actions => actions.map(action => action.payload.doc.data() as Article)),
       map((data: Article[]) => {
         const result = new Map<number, Article[]>();
         data.forEach(item => {
           const value = [...result.get(item.issue) || [], item];
+          // const languageFiltered = value.filter( article => article.language === this.state.activeLang.value);
           result.set(item.issue, value.sort((a, b) => a.position < b.position ? -1 : 1));
         });
         return result;
-      }),
+      })
     );
   }
 
@@ -79,8 +104,16 @@ export class ArticlesService {
 
   private getArticles(date: Date = new Date('yyyy-mm-dd')): Observable<Article[]> {
 
-    return this.db.collection<Article>('news', ref => ref.orderBy('date', 'desc'))
-      .valueChanges();
+    return this.state.activeLang.pipe(
+        tap( data => console.log('trigger', data, this.state.activeLang.value)),
+        withLatestFrom( this.db.collection<Article>('news', ref => ref
+                                                                  .where( 'language', '==', this.state.activeLang.value)
+                                                                  .orderBy('date', 'desc'))
+          .valueChanges(), (lang, data) => data ),
+        // map( (actions: DocumentChangeAction<Article>[]) => actions.map(action => action.payload.doc.data() as Article)),
+        tap(data => console.log('getArticles', data)),
+        // map( data => data[1]),
+      );
   }
 
 

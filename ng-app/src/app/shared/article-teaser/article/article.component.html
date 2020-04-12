@@ -9,13 +9,10 @@
   </div>
   <div class="content ion-text-left">
     <h2>{{ article.title }}</h2>
-    <ion-chip *ngIf="article.source">
-      <ion-label>{{article.source}}</ion-label>
-    </ion-chip>
+    {{article.source}}
     <p>
       {{ article.teaser }}
       Mehr...
     </p>
   </div>
-  <!-- <ion-button expand="block" >Read More</ion-button> -->
 </div>

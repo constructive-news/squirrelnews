@@ -1,21 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
-import { StateService } from '../shared/state.service';
+import { StateService } from '../../state.service';
 
 @Component({
   selector: 'app-more',
-  templateUrl: './more.page.html',
-  styleUrls: ['./more.page.scss'],
+  templateUrl: './more.component.html',
+  styleUrls: ['./more.component.scss'],
 })
-export class MorePage implements OnInit {
+export class MoreComponent implements OnInit {
 
   constructor(
     private nav: NavController,
     private state: StateService
   ) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   ionViewDidEnter() {
     this.state.activeTab.next('more');

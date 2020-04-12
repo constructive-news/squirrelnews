@@ -8,18 +8,6 @@ const routes: Routes = [
     path: '',
     component: MorePage
   },
-  {
-    path: 'previous',
-    loadChildren: () => import('./previous/previous.module').then( m => m.PreviousPageModule)
-  },
-  {
-    path: 'favorites',
-    loadChildren: () => import('./favorites/favorites.module').then( m => m.FavoritesPageModule)
-  },
-  {
-    path: 'all',
-    loadChildren: () => import('./all/all.module').then( m => m.AllPageModule)
-  }
 ];
 
 @NgModule({

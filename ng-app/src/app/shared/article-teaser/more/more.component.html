@@ -1,45 +1,36 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>Squirrel News</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-  <ion-grid style="margin-top: 40%;">
+<div class="wrapper-articler">
+  
+  <ion-grid>
     <ion-row></ion-row>
     <ion-row>
-      <ion-col size="8" offset="2" class="ion-align-self-center"
-      (click)="openAll()">
+      <ion-col size="8" offset="2" class="ion-align-self-center" (click)="openAll()">
         <h2>
           {{ 'issues.all' | translate | async }}
         </h2>
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col size="8" offset="2" class="ion-align-self-center"
-      (click)="openPrevious()" >
+      <ion-col size="8" offset="2" class="ion-align-self-center" (click)="openPrevious()">
         <h2>
           {{ 'issues.previous' | translate | async }}
         </h2>
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col size="8" offset="2"
-      (click)="openFavorites()">
+      <ion-col size="8" offset="2" (click)="openFavorites()">
         <h2>
           {{ 'issues.favorites' | translate | async }}
         </h2>
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col size="8" offset="2"
-      (click)="switchLanguage()">
+      <ion-col size="8" offset="2" (click)="switchLanguage()">
         <h2>
           {{ 'lang.switch' | translate | async }}
         </h2>
       </ion-col>
     </ion-row>
-    <ion-row class="social-media"> 
+    <ion-row class="social-media">
       <ion-col size="3" offset="2">
         <a href="">
           <ion-icon name="logo-facebook" size="large"></ion-icon>
@@ -57,5 +48,4 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-
-</ion-content>
+</div>

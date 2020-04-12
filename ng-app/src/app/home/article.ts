@@ -10,5 +10,6 @@ export interface Article {
   category?: string;
   issue: number;
   published: boolean;
+  language: string;
   expanded?: boolean;
 }

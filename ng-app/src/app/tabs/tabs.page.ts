@@ -22,9 +22,10 @@ export class TabsPage implements OnInit, OnDestroy {
   favorite: boolean;
   activeTab: string;
   ACTIVE_TABS = ['home', 'fav', 'all', 'previous'];
+  canActivate: boolean;
 
   constructor(
-    private state: StateService,
+    public state: StateService,
     private toastController: ToastController,
     private route: ActivatedRoute
   ) { }
@@ -32,18 +33,17 @@ export class TabsPage implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.state.activeSlide
-      // .pipe(
-      //   tap( x => console.log('sub ctive slide', x))
-      // )
       .subscribe(slide => {
-        this.url = slide ? slide.url : '';
-        this.title = slide ? slide.title : '';
-
+        this.url = slide ? slide.url : null;
+        this.title = slide ? slide.title : null;
         this.checkFav().then(result => this.favorite = result);
-
+        this.checkCanActivate().then(result => {
+          console.log(result);
+          this.canActivate = result;
+        });
       });
+
     this.state.activeTab.subscribe(tab => {
-      console.log('active tab', tab);
       this.activeTab = tab;
       if ( this.ACTIVE_TABS.includes(this.activeTab)) {
         this.checkFav().then(result => this.favorite = result);
@@ -60,7 +60,6 @@ export class TabsPage implements OnInit, OnDestroy {
 
   handleTabSwitch() {
 
-    // this.favorite = this.activeTab !== 'home' ? false;
     this.state.activeTab.next(this.tabs.getSelected());
   }
 
@@ -88,6 +87,17 @@ export class TabsPage implements OnInit, OnDestroy {
 
   }
 
+  private async checkCanActivate() {
+    console.log('check can activate', this.state.activeSlide.value, this.activeTab);
+    if( this.state.activeSlide.value === null) {
+      return false;
+    } else if (this.ACTIVE_TABS.includes(this.activeTab)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   private async getFavorites() {
     return JSON.parse((await Storage.get({ key: 'favorites' })).value);
   }
@@ -102,7 +112,6 @@ export class TabsPage implements OnInit, OnDestroy {
         }
       });
 
-      console.log('set Favorite', favs, this.title, index);
       index < 0 ? favs.push(this.title)
         : favs.splice(index, 1);
 

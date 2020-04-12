@@ -1,5 +1,6 @@
 <ion-header> 
-  <ion-toolbar class="home">
+  <ion-toolbar *ngIf="this.state.activeSlide.value; else altToolbar"
+    class="home">
     <ion-title slot="start">
       <span class="title">
         Squirrel News
@@ -8,22 +9,11 @@
   </ion-toolbar>
 </ion-header>
 <ion-content fullscreen>
-  <ion-slides #articleSlider pager="true"
-    (ionSlideDidChange)="handleSlideChange()">
-    <ng-container *ngIf="currentArticles.length > 0; else noArticles">
-      <ion-slide *ngFor="let article of currentArticles" (click)="openBrowser()">
-        <app-article [article]="article"></app-article>
-      </ion-slide>
-    </ng-container>
-  </ion-slides>
+  <app-article-teaser [articles]="currentArticles" [hasMore]="true"></app-article-teaser>
 </ion-content>
 
-<ng-template #noArticles>
-  <ion-slide>
-    <div class="wrapper-article">
-      <img class="logo-image" src="assets/icon/squirrel-news-logo.svg" alt="Squirrel News Logo">
-      No current issue :/
-
-    </div>
-  </ion-slide>
+<ng-template #altToolbar>
+  <ion-toolbar color="primary">
+    <ion-title>Squirrel News</ion-title>
+  </ion-toolbar>
 </ng-template>

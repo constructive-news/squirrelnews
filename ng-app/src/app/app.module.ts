@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { SplashScreenComponent } from './components/splash-screen/splash-screen.component';
 import { firebaseConfig } from 'src/environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
     IonicModule.forRoot({ mode: 'ios'}),
     AppRoutingModule,
     AngularFireModule.initializeApp(firebaseConfig),
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    SharedModule
   ],
   providers: [
     StatusBar,
