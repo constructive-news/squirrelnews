@@ -21,15 +21,15 @@ export class MoreComponent implements OnInit {
   }
 
   openAll() {
-    this.nav.navigateForward('tabs/more/all');
+    this.nav.navigateForward('tabs/home/all');
   }
 
   openPrevious() {
-    this.nav.navigateForward('tabs/more/previous');
+    this.nav.navigateForward('tabs/home/previous');
   }
 
   openFavorites() {
-    this.nav.navigateForward('tabs/more/favorites');
+    this.nav.navigateForward('tabs/home/favorites');
   }
 
   switchLanguage() {

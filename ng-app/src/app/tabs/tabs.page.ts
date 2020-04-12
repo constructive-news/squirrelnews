@@ -27,7 +27,6 @@ export class TabsPage implements OnInit, OnDestroy {
   constructor(
     public state: StateService,
     private toastController: ToastController,
-    private route: ActivatedRoute
   ) { }
 
 
@@ -38,15 +37,17 @@ export class TabsPage implements OnInit, OnDestroy {
         this.title = slide ? slide.title : null;
         this.checkFav().then(result => this.favorite = result);
         this.checkCanActivate().then(result => {
-          console.log(result);
           this.canActivate = result;
         });
       });
 
     this.state.activeTab.subscribe(tab => {
       this.activeTab = tab;
-      if ( this.ACTIVE_TABS.includes(this.activeTab)) {
+      if (this.ACTIVE_TABS.includes(this.activeTab)) {
         this.checkFav().then(result => this.favorite = result);
+        this.checkCanActivate().then(result => {
+          this.canActivate = result;
+        });
       } else {
         this.favorite = false;
       }
@@ -89,7 +90,7 @@ export class TabsPage implements OnInit, OnDestroy {
 
   private async checkCanActivate() {
     console.log('check can activate', this.state.activeSlide.value, this.activeTab);
-    if( this.state.activeSlide.value === null) {
+    if (this.state.activeSlide.value === null && this.ACTIVE_TABS.includes(this.activeTab)) {
       return false;
     } else if (this.ACTIVE_TABS.includes(this.activeTab)) {
       return true;

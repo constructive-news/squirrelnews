@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, OnDestroy } from '@angular/core';
 import { Article } from 'src/app/home/article';
 import { Plugins } from '@capacitor/core';
 import { StateService } from '../state.service';
@@ -12,7 +12,7 @@ const { Browser } = Plugins;
   templateUrl: './article-teaser.component.html',
   styleUrls: ['./article-teaser.component.scss'],
 })
-export class ArticleTeaserComponent implements OnInit {
+export class ArticleTeaserComponent implements OnInit, OnDestroy {
 
   @Input() articles: Article[];
   @Input() hasMore: boolean;
@@ -26,6 +26,10 @@ export class ArticleTeaserComponent implements OnInit {
   ngOnInit() {
     // this.state.activeSlide
     // .subscribe(slide => this.url = slide ? slide.url : '');
+  }
+
+  ngOnDestroy() {
+    console.log('teaser destroy');
   }
 
 

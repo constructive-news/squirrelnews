@@ -26,7 +26,8 @@ export class FavoriteDetailPage implements OnInit {
   }
 
   handleBack() {
-    this.state.activeTab.next('more');
+    this.state.activeTab.next('fav-list');
+    this.state.activeSlide.next(null);
   }
 
 }

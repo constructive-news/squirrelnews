@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import { IonSlides } from '@ionic/angular';
+import { IonSlides, NavController } from '@ionic/angular';
 
 import { ArticlesService } from '../shared/articles.service';
 import { Article } from './article';
@@ -7,6 +7,7 @@ import { Article } from './article';
 import { Plugins } from '@capacitor/core';
 import { StateService } from '../shared/state.service';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 const { Browser } = Plugins;
 
 @Component({
@@ -24,10 +25,12 @@ export class HomePage implements OnInit {
 
   constructor(
     private articlesService: ArticlesService,
+    private router: Router,
     public state: StateService
   ) { }
 
   ngOnInit() {
+    
   }
 
   ionViewWillEnter() {
@@ -35,12 +38,11 @@ export class HomePage implements OnInit {
       this.currentArticles = result;
       this.state.activeSlide.next(this.currentArticles[0]);
     });
-    console.log('entering..');
+
   }
 
   ionViewWillLeave() {
     this.articlesSubscription.unsubscribe();
-    console.log('leaving..');
   }
 
 
