@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { StateService } from '../../state.service';
+import { Plugins } from '@capacitor/core';
+import { TranslatePipe } from '../../translate.pipe';
+
+const { Browser } = Plugins;
 
 @Component({
   selector: 'app-more',
@@ -36,5 +40,12 @@ export class MoreComponent implements OnInit {
     const lang = this.state.activeLang.value === 'de' ? 'en' : 'de';
     console.log('new lang', lang);
     this.state.activeLang.next(lang);
+  }
+
+  openInBrowser(id: string) {
+    const translate = new TranslatePipe(this.state);
+    translate.transform(id).subscribe( translation => {
+      Browser.open({url: translation});
+    });
   }
 }

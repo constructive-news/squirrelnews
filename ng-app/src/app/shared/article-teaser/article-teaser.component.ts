@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, OnDestroy, Output, EventEmitter, AfterViewInit } from '@angular/core';
 import { Article } from 'src/app/home/article';
 import { Plugins } from '@capacitor/core';
 import { StateService } from '../state.service';
@@ -12,10 +12,11 @@ const { Browser } = Plugins;
   templateUrl: './article-teaser.component.html',
   styleUrls: ['./article-teaser.component.scss'],
 })
-export class ArticleTeaserComponent implements OnInit, OnDestroy {
+export class ArticleTeaserComponent implements AfterViewInit {
 
   @Input() articles: Article[];
   @Input() hasMore: boolean;
+  @Output() notifySlideChanged = new EventEmitter<number>();
 
   @ViewChild('articleSlider') slider: IonSlides;
 
@@ -23,24 +24,26 @@ export class ArticleTeaserComponent implements OnInit, OnDestroy {
     private state: StateService
   ) { }
 
-  ngOnInit() {
-    // this.state.activeSlide
-    // .subscribe(slide => this.url = slide ? slide.url : '');
-  }
+  ngAfterViewInit() {
+    console.log('article teaser view init');
+    this.slider.getActiveIndex().then( index => {
+      console.log('index after init', index)
+      this.state.activeSlideIndex.next(index);
+    } );
 
-  ngOnDestroy() {
-    console.log('teaser destroy');
+    this.state.activeSlideIndex.subscribe( index => this.slider.slideTo(index));
   }
-
 
   async openBrowser(url) {
     await Browser.open({ url });
   }
 
   async handleSlideChange() {
+    console.log('slide changed');
     const index = await this.slider.getActiveIndex();
     const data = this.articles[index] || null;
-    this.state.activeSlide.next(data);
+    // this.state.activeSlide.next(data);
+    this.state.activeSlideIndex.next(index);
   }
 
 }

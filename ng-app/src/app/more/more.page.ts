@@ -1,6 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { StateService } from '../shared/state.service';
+import { Plugins } from '@capacitor/core';
+import { TranslatePipe } from '../shared/translate.pipe';
+import { take } from 'rxjs/operators';
+
+
+const { Browser } = Plugins;
+
 
 @Component({
   selector: 'app-more',
@@ -21,21 +28,18 @@ export class MorePage implements OnInit {
     this.state.activeTab.next('more');
   }
 
-  openAll() {
-    this.nav.navigateForward('tabs/more/all');
-  }
-
-  openPrevious() {
-    this.nav.navigateForward('tabs/more/previous');
-  }
-
-  openFavorites() {
-    this.nav.navigateForward('tabs/more/favorites');
+  openInBrowser(id: string) {
+    const translate = new TranslatePipe(this.state);
+    translate.transform(id).pipe(
+      take(1)
+    ).subscribe( translation => {
+      console.log('translated');
+      Browser.open({url: translation});
+    });
   }
 
   switchLanguage() {
     const lang = this.state.activeLang.value === 'de' ? 'en' : 'de';
-    console.log('new lang', lang);
     this.state.activeLang.next(lang);
   }
 }

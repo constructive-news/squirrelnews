@@ -1,4 +1,4 @@
-package io.ionic.starter;
+package org.constructivenews.squirrelnews;
 
 import android.os.Bundle;
 

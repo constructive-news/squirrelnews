@@ -8,7 +8,7 @@ export interface Article {
   imageUrl: string;
   credit: string;
   category?: string;
-  issue: number;
+  issue: string;
   published: boolean;
   language: string;
   expanded?: boolean;

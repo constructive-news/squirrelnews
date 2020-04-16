@@ -9,7 +9,7 @@ const routes: Routes = [
     component: AllPage
   },
   {
-    path: ':title',
+    path: ':issue',
     loadChildren: () => import('./article-detail/article-detail.module').then( m => m.ArticleDetailPageModule)
   }
 ];

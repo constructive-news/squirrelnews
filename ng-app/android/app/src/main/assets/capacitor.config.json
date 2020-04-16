@@ -1,6 +1,6 @@
 {
-  "appId": "io.ionic.starter",
-  "appName": "squirrelnews-app",
+  "appId": "org.constructivenews.squirrelnews",
+  "appName": "Squirrel News",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",

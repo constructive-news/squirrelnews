@@ -5,32 +5,55 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid style="margin-top: 40%;">
+  <ion-grid style="margin-top: 20%;">
+    <ion-row>
+      <ion-col size="8" offset="2" class="ion-align-self-center">
+        <img src="../../assets/icon/sn-logo.svg" alt="Squirrel News Logo">
+      </ion-col>
+    </ion-row>
     <ion-row></ion-row>
     <ion-row>
       <ion-col size="8" offset="2" class="ion-align-self-center"
-      (click)="openAll()">
+      (click)="openInBrowser('privacyPolicy.url')">
         <h2>
-          {{ 'issues.all' | translate | async }}
+          {{ 'privacyPolicy.name' | translate | async }}
         </h2>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col size="8" offset="2" class="ion-align-self-center"
-      (click)="openPrevious()" >
+      (click)="openInBrowser('imprint.url')" >
         <h2>
-          {{ 'issues.previous' | translate | async }}
+          {{ 'imprint.name' | translate | async }}
         </h2>
       </ion-col>
     </ion-row>
     <ion-row>
+      <ion-col size="8" offset="2" class="ion-align-self-center"
+      (click)="openInBrowser('support.url')" >
+        <h2>
+          {{ 'support.name' | translate | async }}
+        </h2>
+      </ion-col>
+    </ion-row>
+    
+    <ion-row>
+      <ion-col size="8" offset="2" class="ion-align-self-center"
+      (click)="openInBrowser('about.url')" >
+        <h2>
+          {{ 'about.name' | translate | async }}
+        </h2>
+      </ion-col>
+    </ion-row>
+
+    <!-- <ion-row>
       <ion-col size="8" offset="2"
       (click)="openFavorites()">
         <h2>
           {{ 'issues.favorites' | translate | async }}
         </h2>
       </ion-col>
-    </ion-row>
+    </ion-row> -->
     <ion-row>
       <ion-col size="8" offset="2"
       (click)="switchLanguage()">
@@ -39,7 +62,7 @@
         </h2>
       </ion-col>
     </ion-row>
-    <ion-row class="social-media"> 
+    <!-- <ion-row class="social-media"> 
       <ion-col size="3" offset="2">
         <a href="">
           <ion-icon name="logo-facebook" size="large"></ion-icon>
@@ -55,7 +78,7 @@
           <ion-icon name="logo-twitter" size="large"></ion-icon>
         </a>
       </ion-col>
-    </ion-row>
+    </ion-row> -->
   </ion-grid>
 
 </ion-content>

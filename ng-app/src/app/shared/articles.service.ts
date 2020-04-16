@@ -61,7 +61,7 @@ export class ArticlesService {
       .orderBy('issue', 'asc')).snapshotChanges().pipe(
       map(actions => actions.map(action => action.payload.doc.data() as Article)),
       map((data: Article[]) => {
-        const result = new Map<number, Article[]>();
+        const result = new Map<string, Article[]>();
         data.forEach(item => {
           const value = [...result.get(item.issue) || [], item];
           // const languageFiltered = value.filter( article => article.language === this.state.activeLang.value);

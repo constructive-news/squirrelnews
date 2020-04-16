@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Article } from 'src/app/home/article';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StateService } from 'src/app/shared/state.service';
+import { firestore } from 'firebase';
+import { ArticlesService } from '../../articles.service';
+import { filter, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-article-detail',
@@ -10,22 +13,27 @@ import { StateService } from 'src/app/shared/state.service';
 })
 export class ArticleDetailPage implements OnInit {
 
-  article: Article;
+  routerState: { issue: string };
+  currentArticles: Article[];
 
   constructor(
     private router: Router,
-    private state: StateService
+    private state: StateService,
+    private articles: ArticlesService
   ) { }
 
   ngOnInit() {
 
-    this.article = this.router.getCurrentNavigation().extras.state as Article;
-    this.state.activeTab.next('all');
-    this.state.activeSlide.next(this.article);
+    this.routerState = this.router.getCurrentNavigation().extras.state as { issue: string };
+    this.state.activeTab.next('all-detail');
+    this.articles.getArchiveList().pipe(
+      map( data => data.get(this.routerState.issue))
+    ).subscribe( result => this.currentArticles = result);
+
   }
 
   handleBack() {
-    this.state.activeTab.next('more');
+    this.state.activeTab.next('all');
   }
 
 }

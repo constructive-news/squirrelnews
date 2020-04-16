@@ -10,7 +10,7 @@ import { StateService } from '../state.service';
   templateUrl: './favorites.page.html',
   styleUrls: ['./favorites.page.scss'],
 })
-export class FavoritesPage implements OnInit {
+export class FavoritesPage {
 
   constructor(
     private nav: NavController,
@@ -20,10 +20,6 @@ export class FavoritesPage implements OnInit {
 
   favorites: Observable<Article[]>;
 
-  ngOnInit() {
-    console.log('favorites list');
-  }
-
   openDetail(article) {
     this.nav.navigateForward(`tabs/home/favorites/${article.title}`, { state: article });
   }
@@ -31,6 +27,7 @@ export class FavoritesPage implements OnInit {
   ionViewWillEnter() {
     this.favorites = this.articles.getFavorites();
     this.state.activeTab.next('fav-list');
+    this.state.activeSlide.next(null);
   }
 
   ionViewWillLeave() {

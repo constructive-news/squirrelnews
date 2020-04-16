@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import { IonSlides, NavController } from '@ionic/angular';
 
 import { ArticlesService } from '../shared/articles.service';
@@ -6,8 +6,9 @@ import { Article } from './article';
 
 import { Plugins } from '@capacitor/core';
 import { StateService } from '../shared/state.service';
-import { Subscription } from 'rxjs';
+import { Subscription, combineLatest } from 'rxjs';
 import { Router } from '@angular/router';
+import { tap } from 'rxjs/operators';
 const { Browser } = Plugins;
 
 @Component({
@@ -15,31 +16,30 @@ const { Browser } = Plugins;
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage implements OnInit {
+export class HomePage implements AfterViewInit {
 
-
-  @ViewChild('articleSlider') slider: IonSlides;
 
   currentArticles: Article[] = [];
   private articlesSubscription: Subscription;
 
   constructor(
     private articlesService: ArticlesService,
-    private router: Router,
     public state: StateService
   ) { }
 
-  ngOnInit() {
-    
-  }
+    ngAfterViewInit() {
+    }
 
   ionViewWillEnter() {
-    this.articlesSubscription = this.articlesService.getCurrentIssue().subscribe(result => {
-      this.currentArticles = result;
-      this.state.activeSlide.next(this.currentArticles[0]);
+    this.articlesSubscription = combineLatest([this.articlesService.getCurrentIssue(), this.state.activeSlideIndex]).subscribe(result => {
+      this.currentArticles = result[0];
+      const index = result[1];
+      index === null
+                        ? this.state.activeSlide.next(this.currentArticles[0])
+                        : this.state.activeSlide.next(this.currentArticles[index])
     });
-
   }
+
 
   ionViewWillLeave() {
     this.articlesSubscription.unsubscribe();

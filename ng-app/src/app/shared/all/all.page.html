@@ -13,18 +13,18 @@
 <ion-content>
 
   <ion-list>
-    <ion-item *ngFor="let issue of articles$ | keyvalue">
+    <ion-item *ngFor="let issue of issues" (click)="openDetails(issue)">
       <ion-label> 
-        <h2 (click)="expand(issue.key)">
-          {{ issue.key }}
+        <h2>
+          {{ issue }}
         </h2>
-        <app-expandable expandHeight="150px" [expanded]=" issue.value.expanded">
+        <!-- <app-expandable expandHeight="150px" [expanded]=" issue.value.expanded">
           <div *ngFor="let article of issue.value.articles">
             <h3 (click)="openDetails(article)">
               {{article.position}}. {{article.title}}
             </h3>
           </div>
-        </app-expandable>
+        </app-expandable>  -->
       </ion-label>
     </ion-item>
   </ion-list>

@@ -6,10 +6,12 @@
       text=""
         (click)="handleBack()"></ion-back-button>
     </ion-buttons>
-    <ion-title>{{ 'issues.all' | translate | async }}</ion-title>
+    <ion-title>{{ routerState.issue }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <app-article [article]="article"></app-article>
+  <ion-content fullscreen>
+    <app-article-teaser [articles]="currentArticles" [hasMore]="false" ></app-article-teaser>
+  </ion-content>
 </ion-content>

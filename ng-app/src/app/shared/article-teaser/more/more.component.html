@@ -1,5 +1,5 @@
-<div class="wrapper-articler">
-  
+<div class="wrapper-article">
+
   <ion-grid>
     <ion-row></ion-row>
     <ion-row>
@@ -31,20 +31,16 @@
       </ion-col>
     </ion-row>
     <ion-row class="social-media">
-      <ion-col size="3" offset="2">
-        <a href="">
-          <ion-icon name="logo-facebook" size="large"></ion-icon>
-        </a>
+      <ion-col size="3" offset="2" (click)="openInBrowser('links.facebook')">
+        <ion-icon name="logo-facebook" size="large"></ion-icon>
+      </ion-col>
+      <ion-col size="3" (click)="openInBrowser('links.instagram')">
+        <ion-icon name="logo-instagram" size="large"></ion-icon>
       </ion-col>
       <ion-col size="3">
-        <a href="https://www.instagram.com/squirrelnews.de/">
-          <ion-icon name="logo-instagram" size="large"></ion-icon>
-        </a>
-      </ion-col>
-      <ion-col size="3">
-        <a href="https://twitter.com/squirrelnews_de">
-          <ion-icon name="logo-twitter" size="large"></ion-icon>
-        </a>
+        <!-- <a href="https://twitter.com/squirrelnews_de"> -->
+        <ion-icon name="logo-twitter" size="large"></ion-icon>
+        <!-- </a> -->
       </ion-col>
     </ion-row>
   </ion-grid>

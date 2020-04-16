@@ -2,8 +2,6 @@ import { Component, OnInit, OnDestroy, ViewChild, ElementRef, AfterViewInit, Aft
 import { Plugins } from '@capacitor/core';
 import { StateService } from '../shared/state.service';
 import { ToastController, IonTabs } from '@ionic/angular';
-import { tap } from 'rxjs/operators';
-import { ActivatedRoute } from '@angular/router';
 
 const { Share, Storage } = Plugins;
 @Component({
@@ -33,6 +31,7 @@ export class TabsPage implements OnInit, OnDestroy {
   ngOnInit() {
     this.state.activeSlide
       .subscribe(slide => {
+        console.log('active slide changed', slide);
         this.url = slide ? slide.url : null;
         this.title = slide ? slide.title : null;
         this.checkFav().then(result => this.favorite = result);
@@ -64,6 +63,11 @@ export class TabsPage implements OnInit, OnDestroy {
     this.state.activeTab.next(this.tabs.getSelected());
   }
 
+  handleDoubleClick() {
+    console.log('dblclick');
+    this.state.activeSlideIndex.next(0);
+  }
+
   async handleShareTapped() {
     await Share.share({
       dialogTitle: 'Nachricht teilen...',
@@ -90,7 +94,8 @@ export class TabsPage implements OnInit, OnDestroy {
 
   private async checkCanActivate() {
     console.log('check can activate', this.state.activeSlide.value, this.activeTab);
-    if (this.state.activeSlide.value === null && this.ACTIVE_TABS.includes(this.activeTab)) {
+    if ( (this.state.activeSlide.value === null || this.state.activeSlide.value === undefined) &&
+          this.ACTIVE_TABS.includes(this.activeTab)) {
       return false;
     } else if (this.ACTIVE_TABS.includes(this.activeTab)) {
       return true;

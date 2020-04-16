@@ -1,15 +1,15 @@
-<ion-header> 
+<ion-header collapse="condense">
   <ion-toolbar *ngIf="this.state.activeSlide.value; else altToolbar"
     class="home">
-    <ion-title slot="start">
-      <span class="title">
-        Squirrel News
-      </span>
+    <ion-title size="large">
+      <!-- <span class="title"> -->
+        <img id="logo" src="../../assets/icon/sn-logo-name.svg" height="76" alt="Squirrel News Logo with text">
+      <!-- </span> -->
     </ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content fullscreen>
-  <app-article-teaser [articles]="currentArticles" [hasMore]="true"></app-article-teaser>
+  <app-article-teaser [articles]="currentArticles" [hasMore]="true" ></app-article-teaser>
 </ion-content>
 
 <ng-template #altToolbar>

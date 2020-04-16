@@ -1,6 +1,6 @@
 <ion-tabs #tabs (ionTabsDidChange)="handleTabSwitch()">
   <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="home">
+    <ion-tab-button tab="home" (press)="handleDoubleClick()">
       <ion-icon name="home-outline"></ion-icon>
       <!-- <ion-label>home</ion-label> -->
       <!-- <ion-badge>6</ion-badge> -->
