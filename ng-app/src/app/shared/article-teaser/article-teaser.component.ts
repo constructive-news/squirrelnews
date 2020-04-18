@@ -28,22 +28,26 @@ export class ArticleTeaserComponent implements AfterViewInit {
     console.log('article teaser view init');
     this.slider.getActiveIndex().then( index => {
       console.log('index after init', index)
-      this.state.activeSlideIndex.next(index);
-    } );
+      this.state.activeSlideIndex.next(0);
+    } );1
 
-    this.state.activeSlideIndex.subscribe( index => this.slider.slideTo(index));
+    // this.state.activeSlideIndex.subscribe( index => this.slider.slideTo(index));
   }
 
   async openBrowser(url) {
     await Browser.open({ url });
   }
 
-  async handleSlideChange() {
+  handleSlideChange() {
     console.log('slide changed');
-    const index = await this.slider.getActiveIndex();
-    const data = this.articles[index] || null;
-    // this.state.activeSlide.next(data);
-    this.state.activeSlideIndex.next(index);
+    this.slider.getActiveIndex().then( index => {
+      console.log('active index', index);
+      this.state.activeSlideIndex.next(index);
+
+    }, (err) => {
+      console.log('something went wrong', err);
+    });
+    
   }
 
 }
