@@ -33,3 +33,5 @@ npm-debug.log*
 
 # special files
 src/environments/environment.firebase.ts
+
+.vscode/
