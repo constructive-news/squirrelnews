@@ -31,4 +31,5 @@ npm-debug.log*
 /www
 
 
-src/app/environments/environment.firebase.ts
+# special files
+src/environments/environment.firebase.ts
