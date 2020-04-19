@@ -1,0 +1,55 @@
+
+.wrapper-archive {
+  margin-top: 40px;
+}
+
+.wrapper-image {
+  width: 100%;
+  height: 55vh;
+}
+
+.photo-credit {
+  display:inline-block;
+  position: absolute;
+  writing-mode: vertical-rl;
+  text-orientation: sideways !important;
+  text-align: start;
+  // padding-left: 10px;
+  top: 25vh;
+  left: calc(100vw - 30px);
+  color: #fff;
+  transform: rotate(180deg);
+  text-overflow: ellipsis;
+  height: 200px;
+}
+
+.header-box {
+  position: absolute;
+  padding: 10px;
+  z-index: 10;
+  display: flex;
+}
+
+.issue {
+  position: absolute;
+  top: 60px;
+  left: calc(100vw - 100px);
+  font-size: 14px;
+  color: #fff;
+}
+
+.logo-image {
+  width: 30px;
+  margin-top: 8px;
+  margin-right: 5px;
+}
+
+.title {
+  text-align: left;
+  width: 60px;
+}
+
+.content {
+  padding: 0 10px 20px 10px;
+  // margin-bottom: 20px;
+}

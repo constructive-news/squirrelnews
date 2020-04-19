@@ -24,3 +24,36 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+ion-toolbar.home {
+  --background: rgba(0,0,0,0);
+  --color: #fff;
+  --border-style: none;
+}
+
+ion-slides {
+  --bullet-background-active: black;
+}
+
+ion-tab-bar {
+  --background: rgb(240,240,233);
+}
+
+
+
+
+:root {
+  --ion-font-family: 'Lato'
+}
+
+.wrapper-article {
+  width: 100%;
+  height: 85%;
+}
+
+
+
+main {/* Old browsers */
+
+}
+

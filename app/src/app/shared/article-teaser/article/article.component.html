@@ -1,0 +1,21 @@
+<div class="wrapper-article">
+  <div class="wrapper-image" [ngStyle]="{ 
+      'background': 'url(' + article.imageUrl + ') no-repeat top center',
+      'background-size': 'cover'
+    }">
+    <div class="photo-credit">
+      Foto: {{article.credit}}
+    </div>
+  </div>
+  <div class="issue">
+    {{ article.issue }}
+  </div>
+  <div class="content ion-text-left">
+    <h2>{{ article.title }}</h2>
+    {{article.source}}
+    <p>
+      {{ article.teaser }}
+      Mehr...
+    </p>
+  </div>
+</div>

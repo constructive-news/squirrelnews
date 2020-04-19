@@ -1,0 +1,47 @@
+<div class="wrapper-article">
+
+  <ion-grid>
+    <ion-row></ion-row>
+    <ion-row>
+      <ion-col size="8" offset="2" class="ion-align-self-center" (click)="openAll()">
+        <h2>
+          {{ 'issues.all' | translate | async }}
+        </h2>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="8" offset="2" class="ion-align-self-center" (click)="openPrevious()">
+        <h2>
+          {{ 'issues.previous' | translate | async }}
+        </h2>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="8" offset="2" (click)="openFavorites()">
+        <h2>
+          {{ 'issues.favorites' | translate | async }}
+        </h2>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="8" offset="2" (click)="switchLanguage()">
+        <h2>
+          {{ 'lang.switch' | translate | async }}
+        </h2>
+      </ion-col>
+    </ion-row>
+    <ion-row class="social-media">
+      <ion-col size="3" offset="2" (click)="openInBrowser('links.facebook')">
+        <ion-icon name="logo-facebook" size="large"></ion-icon>
+      </ion-col>
+      <ion-col size="3" (click)="openInBrowser('links.instagram')">
+        <ion-icon name="logo-instagram" size="large"></ion-icon>
+      </ion-col>
+      <ion-col size="3">
+        <!-- <a href="https://twitter.com/squirrelnews_de"> -->
+        <ion-icon name="logo-twitter" size="large"></ion-icon>
+        <!-- </a> -->
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</div>
