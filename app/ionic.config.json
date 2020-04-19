@@ -1,0 +1,7 @@
+{
+  "name": "squirrel-news",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
