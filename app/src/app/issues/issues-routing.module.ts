@@ -8,10 +8,6 @@ const routes: Routes = [
     path: ':issueNum',
     component: IssuesPage
   },
-  // {
-  //   path: 'previous',
-  //   loadChildren: () => import('./previous/previous.module').then( m => m.PreviousPageModule)
-  // }
 ];
 
 @NgModule({
