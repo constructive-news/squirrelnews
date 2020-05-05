@@ -28,8 +28,6 @@ export class ArticlesService {
       // filter current Issue
       tap(data => console.log('value', data)),
       map( ([lang, data]) => data),
-      // map( (actions: DocumentChangeAction<Article>[]) => actions.map(action => action.payload.doc.data() as Article)),
-      // tap(data => console.log('just data', data)),
       map(data => {
         // get filtered list of current issue by fitlering over the array
         let i = 0;
@@ -64,13 +62,13 @@ export class ArticlesService {
         const result = new Map<string, Article[]>();
         data.forEach(item => {
           const value = [...result.get(item.issue) || [], item];
-          // const languageFiltered = value.filter( article => article.language === this.state.activeLang.value);
           result.set(item.issue, value.sort((a, b) => a.position < b.position ? -1 : 1));
         });
         return result;
       })
     );
   }
+
 
   public getFavorites() {
     return combineLatest([this.db.collection<Article>('news').snapshotChanges(), from(Storage.get({ key: 'favorites' }))])
