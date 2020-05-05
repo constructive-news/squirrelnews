@@ -1,4 +1,4 @@
-import { Component, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, AfterViewInit, OnInit } from '@angular/core';
 import { IonSlides, NavController } from '@ionic/angular';
 
 import { ArticlesService } from '../shared/articles.service';
@@ -9,6 +9,7 @@ import { StateService } from '../shared/state.service';
 import { Subscription, combineLatest } from 'rxjs';
 import { Router } from '@angular/router';
 import { tap } from 'rxjs/operators';
+import { PushNotificationsService } from '../shared/push-notifications.service';
 const { Browser } = Plugins;
 
 @Component({
@@ -16,7 +17,7 @@ const { Browser } = Plugins;
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage implements AfterViewInit {
+export class HomePage implements OnInit, AfterViewInit {
 
 
   currentArticles: Article[] = [];
@@ -24,11 +25,15 @@ export class HomePage implements AfterViewInit {
 
   constructor(
     private articlesService: ArticlesService,
-    public state: StateService
+    public state: StateService,
+    protected pushNotificationService: PushNotificationsService
   ) { }
 
-    ngAfterViewInit() {
-    }
+  ngOnInit(){
+  }
+
+  ngAfterViewInit() {
+  }
 
   ionViewWillEnter() {
     this.articlesSubscription = combineLatest([this.articlesService.getCurrentIssue(), this.state.activeSlideIndex]).subscribe(result => {
