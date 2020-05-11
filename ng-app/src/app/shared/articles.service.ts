@@ -16,11 +16,34 @@ export class ArticlesService {
     private state: StateService
   ) { }
 
+  public getCurrentIssue2(): any {
+    return zip(
+      this.state.activeLang,
+      this.db.collection('issues', ref => ref
+        .where('language', '==', this.state.activeLang.value)
+        .orderBy('dateCreated', 'desc').limit(1)).valueChanges()
+    ).pipe(
+      tap( data => console.log('collection from issue', data)),
+      map( ([lang, data]) => {
+        
+        (data[0] as any).articles.map( item => {
+          console.log(item);
+          this.db.collection(
+            'news',
+            ref => environment.flag === 'prod' ? ref
+            .where('id')  
+            .where('production', '==', true) : ref).valueChanges();
+        })
+      }),
+      // take(1),
+      // flatMap( data =>  )
+    );
+  }
 
   /** returns articles from current issue */
   public getCurrentIssue(): Observable<Article[]> {
 
-    return zip(
+    return zip( 
       this.state.activeLang,
       this.db.collection<Article>('news', ref => ref
       .where( 'language', '==', this.state.activeLang.value)

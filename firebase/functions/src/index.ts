@@ -44,6 +44,115 @@ function ISO8601_week_no(dt: Date) {
   return 1 + Math.ceil((firstThursday - tdt.getTime()) / 604800000);
 }
 
+const checkToken = async (token: any ): Promise<boolean> => {
+  const queryToken = await admin.firestore().collection('access-tokens').doc('sheet').get();
+  return queryToken.get('token') === token ? true : false;
+}
+
+
+export const createNewIssue = functions.https.onRequest(async (request, response) => {
+
+  const tokenAccepted = await checkToken(request.headers['token']);
+  if ( request.method === 'POST' && tokenAccepted) {
+
+    if ( request.body.title === undefined || request.body.title === null) {
+      response.send(400).send('Required fields are not valid please check your request');
+    } else if (request.body.language === undefined || request.body.language === null) {
+      response.send(400).send('Required fields are not valid please check your request');
+    } else {
+      // insert new issue
+      const element = {
+        title: request.body.title,
+        headline: request.body.headline || null,
+        teaser: request.body.teaser || null,
+        language: request.body.language,
+        dateCreated: new Date()
+      }
+
+      const result = await admin.firestore().collection('issues').add(element);
+      response.status(200).json({
+        message: `success`,
+        inserted: result.id
+      });
+    }
+
+  } else {
+    response.status(400).send('Bad Request')
+  }
+});
+
+
+export const addArticleToIssue = functions.https.onRequest(async (request, response) => {
+  const tokenAccepted = await checkToken(request.headers['token']);
+  if (request.method === 'PATCH' && tokenAccepted ) {
+
+    const element = {
+      position: request.body.position,
+      title: request.body.title,
+      teaser: request.body.teaser,
+      source: request.body.source,
+      url: request.body.url,
+      imageUrl: request.body.imageUrl,
+      credit: request.body.credit,
+      dateCreated: new Date(),
+      language: request.body.language,
+      published: request.body.published
+    };
+
+    const result = await admin.firestore().collection('issues').doc(request.body.issue).collection('articles').add(element);
+
+    if(result.id) {
+      response.status(200).json({
+        message: `success`,
+        inserted: result.id
+      });
+    } else {
+      response.status(418).json({
+        message: 'error, something wrong happened',
+      })
+    }
+
+
+  } else {
+    response.status(400).send('Bad Request');
+  }
+});
+
+
+export const publishArticle = functions.https.onRequest( async (request, response) => {
+
+  const tokenAccepted = checkToken(request.headers.token);
+
+  if (request.method === 'PATCH' && tokenAccepted) {
+    const query = await admin.firestore()
+                                  .collection('issues').doc(`${request.body.issueId}/articles/${request.body.articleId}`).get();
+                                    // .collection('articles').where(admin.firestore.FieldPath.documentId(), '==', request.body.articleId).get();
+
+    const article = query.data();
+    
+    if (article) {
+      article.published = request.body.action === 'publish' ? true : false;
+
+      await admin.firestore().doc(`issues/${request.body.issueId}/articles/${request.body.articleId}`).set(article);
+
+
+      response.status(200).json({
+        message: `success`,
+        inserted: request.body.articleId
+      });
+
+    } else {
+      response.status(404).json({
+        message: `not found`,
+        reason: 'requested article was not found'
+      });
+    }
+  } else {
+    response.status(400).send('Bad Request');
+  }
+});
+
+
 /**
  * used to store a specific publication into firebase store from a specific client 
  */
@@ -102,10 +211,6 @@ export const publishCurations = functions.https.onRequest(async (request, respon
               message: "did not work"
             })
           }
-
-                                                          // : await admin.firestore().doc(`news/${requestBody.id}`).set({ published: false});
-          
-
       } else if (requestBody.id === undefined) {
         response.status(400).send();
 
