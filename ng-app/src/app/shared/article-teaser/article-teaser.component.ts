@@ -15,6 +15,7 @@ const { Browser } = Plugins;
 export class ArticleTeaserComponent implements AfterViewInit {
 
   @Input() articles: Article[];
+  @Input() issue: any;
   @Input() hasMore: boolean;
   @Output() notifySlideChanged = new EventEmitter<number>();
 
@@ -29,9 +30,8 @@ export class ArticleTeaserComponent implements AfterViewInit {
     this.slider.getActiveIndex().then( index => {
       console.log('index after init', index)
       this.state.activeSlideIndex.next(0);
-    } );1
+    } );
 
-    // this.state.activeSlideIndex.subscribe( index => this.slider.slideTo(index));
   }
 
   async openBrowser(url) {
@@ -47,7 +47,6 @@ export class ArticleTeaserComponent implements AfterViewInit {
     }, (err) => {
       console.log('something went wrong', err);
     });
-    
   }
 
 }

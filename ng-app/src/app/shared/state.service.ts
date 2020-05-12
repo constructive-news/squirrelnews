@@ -7,7 +7,7 @@ import { Article } from '../home/article';
 })
 export class StateService {
 
-  public activeSlide: BehaviorSubject<Article> = new BehaviorSubject(null);
+  public activeSlide: BehaviorSubject<Partial<Article>> = new BehaviorSubject(null);
   public activeSlideIndex: BehaviorSubject<number> = new BehaviorSubject(null);
   public activeTab: BehaviorSubject<string> = new BehaviorSubject(null);
   public acticeFav: BehaviorSubject<boolean> = new BehaviorSubject(true);

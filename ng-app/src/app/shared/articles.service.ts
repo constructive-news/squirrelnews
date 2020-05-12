@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Article } from '../home/article';
 import { Observable, from, concat, of, combineLatest, forkJoin, zip } from 'rxjs';
-import { filter, toArray, tap, flatMap, concatMap, take, map, distinct, mapTo, combineAll, skip, withLatestFrom } from 'rxjs/operators';
+import { filter, toArray, tap, flatMap, concatMap, take, map, distinct, mapTo, combineAll, skip, withLatestFrom, switchMap, mergeMap } from 'rxjs/operators';
 import { AngularFirestore, DocumentChangeAction } from '@angular/fire/firestore';
 import { environment } from '../../environments/environment';
 import { Plugins } from '@capacitor/core';
@@ -16,34 +16,37 @@ export class ArticlesService {
     private state: StateService
   ) { }
 
-  public getCurrentIssue2(): any {
+  public getCurrentIssue2(issueIndex: number) {
     return zip(
       this.state.activeLang,
       this.db.collection('issues', ref => ref
         .where('language', '==', this.state.activeLang.value)
-        .orderBy('dateCreated', 'desc').limit(1)).valueChanges()
+        .orderBy('publishedAt', 'desc')).valueChanges({ idField: 'issueId'}),
     ).pipe(
-      tap( data => console.log('collection from issue', data)),
-      map( ([lang, data]) => {
-        
-        (data[0] as any).articles.map( item => {
-          console.log(item);
-          this.db.collection(
-            'news',
-            ref => environment.flag === 'prod' ? ref
-            .where('id')  
-            .where('production', '==', true) : ref).valueChanges();
-        })
+      // tap( data => console.log('query result', issueIndex, data, this.state.activeLang.value)),
+      map( ([lang, data]: any[]) => {
+        // forget about the language and abort criteria: return empty array if index is out of issues
+        const result = issueIndex < data.length ? data[issueIndex] : [];
+        console.log(issueIndex, data, issueIndex < data.length, result);
+        return result;
       }),
-      // take(1),
-      // flatMap( data =>  )
+      tap(data => console.log('issue', data)),
+      switchMap( (issue: any) =>
+        // abort criteria: return empty stream if index is out of issueId does not exist
+        zip(
+          of(issue),
+          issue.issueId ? this.db.collection(`issues/${issue.issueId}/articles`).valueChanges(): of([])
+        )
+      ),
+      map( ([issue, articles]) => ({ issue, articles })),
+      tap( data => console.log('result', data))
     );
   }
 
   /** returns articles from current issue */
   public getCurrentIssue(): Observable<Article[]> {
 
-    return zip( 
+    return zip(
       this.state.activeLang,
       this.db.collection<Article>('news', ref => ref
       .where( 'language', '==', this.state.activeLang.value)

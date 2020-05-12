@@ -3,6 +3,7 @@ import { NavController } from '@ionic/angular';
 import { StateService } from '../../state.service';
 import { Plugins } from '@capacitor/core';
 import { TranslatePipe } from '../../translate.pipe';
+import { ActivatedRoute } from '@angular/router';
 
 const { Browser } = Plugins;
 
@@ -13,12 +14,20 @@ const { Browser } = Plugins;
 })
 export class MoreComponent implements OnInit {
 
+
+  issueIdx: number;
+
   constructor(
     private nav: NavController,
+    private route: ActivatedRoute,
     private state: StateService
   ) { }
 
-  ngOnInit() { }
+
+  ngOnInit() {
+    this.issueIdx = parseInt(this.route.snapshot.paramMap.get('issueId'), 10) || 0;
+    console.log(this.issueIdx);
+  }
 
   ionViewDidEnter() {
     this.state.activeTab.next('more');
@@ -29,7 +38,7 @@ export class MoreComponent implements OnInit {
   }
 
   openPrevious() {
-    this.nav.navigateForward('tabs/home/previous');
+    this.nav.navigateForward(`tabs/home/previous/${this.issueIdx + 1}`);
   }
 
   openFavorites() {

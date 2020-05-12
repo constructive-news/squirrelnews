@@ -1,16 +1,16 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>{{ 'issues.previous' | translate | async }}</ion-title>
+    <ion-title *ngIf="issue">{{ issue.title }}</ion-title>
+    <ion-title *ngIf="!issue">{{ 'issues.previous' | translate | async }}</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button
+        icon="arrow-back-outline"
+        text=""
+        (click)="handleBack()"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-slides #articleSlider pager="true"
-    (ionSlideDidChange)="handleSlideChange()">
-    <ng-container *ngIf="articles.length > 0">
-      <ion-slide *ngFor="let article of articles" (click)="openBrowser()">
-        <app-article [article]="article"></app-article>
-      </ion-slide>
-    </ng-container>
-  </ion-slides>
+<ion-content fullscreen>
+  <app-article-teaser [issue]="issue" [articles]="currentArticles" [hasMore]="true" ></app-article-teaser>
 </ion-content>

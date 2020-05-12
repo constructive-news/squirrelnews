@@ -2,7 +2,8 @@ export const DE = {
   issues: {
     all: 'Alle Ausgaben',
     previous: 'Vorherige Ausgabe',
-    favorites: 'Favoriten'
+    favorites: 'Favoriten',
+    noMoreIssue: 'Unglücklicherweise existieren keine weiteren Ausgaben.'
   },
   lang: {
     switch: 'Englische Version'
@@ -38,7 +39,8 @@ export const EN = {
   issues: {
     all: 'All Issues',
     previous: 'Previous Issue',
-    favorites: 'Favorites'
+    favorites: 'Favorites',
+    noMoreIssue: 'Unfortunately, no more issues exist.'
   },
   lang: {
     switch: 'German Version'

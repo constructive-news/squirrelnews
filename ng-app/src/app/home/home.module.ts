@@ -20,7 +20,7 @@ import { SharedModule } from '../shared/shared.module';
         component: HomePage
       },
       {
-      path: 'previous',
+      path: 'previous/:issueId',
       loadChildren: () => import('../shared/previous/previous.module').then( m => m.PreviousPageModule)
       },
       {
