@@ -17,7 +17,6 @@ const { Browser } = Plugins;
 export class MorePage implements OnInit {
 
   constructor(
-    private nav: NavController,
     private state: StateService
   ) { }
 

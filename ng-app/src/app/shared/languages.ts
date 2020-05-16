@@ -1,4 +1,8 @@
 export const DE = {
+  article: {
+    more: 'Mehr...',
+    photo: 'Foto:'
+  },
   issues: {
     all: 'Alle Ausgaben',
     previous: 'Vorherige Ausgabe',
@@ -36,6 +40,10 @@ export const DE = {
 };
 
 export const EN = {
+  article: {
+    more: 'More...',
+    photo: 'photo:'
+  },
   issues: {
     all: 'All Issues',
     previous: 'Previous Issue',

@@ -61,12 +61,16 @@ export const createNewIssue = functions.https.onRequest(async (request, response
       response.send(400).send('Required fields are not valid please check your request');
     } else {
       // insert new issue
+
+      const ds = request.body.title.split(".");
+
       const element = {
         title: request.body.title,
         headline: request.body.headline || null,
         teaser: request.body.teaser || null,
         language: request.body.language,
-        dateCreated: new Date()
+        dateCreated: new Date(),
+        publishedAt: new Date(`${ds[1]}/${parseInt(ds[0])+1}/${ds[2]}`)
       }
 
       const result = await admin.firestore().collection('issues').add(element);
@@ -81,6 +85,13 @@ export const createNewIssue = functions.https.onRequest(async (request, response
   }
 });
 
+export const getArticle = functions.https.onRequest( async (request, response) => {
+  const tokenAccepted = await checkToken(request.headers['token']);
+  if ( request.method === 'GET' && tokenAccepted) {
+    
+    // console.log(collections);
+  }
+});
 
 export const addArticleToIssue = functions.https.onRequest(async (request, response) => {
   const tokenAccepted = await checkToken(request.headers['token']);

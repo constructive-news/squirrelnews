@@ -14,7 +14,7 @@ export class TabsPage implements OnInit, OnDestroy {
   @ViewChild('tabs') tabs: IonTabs;
 
   url: string = null;
-  title: string = null;
+  articleID: string = null;
 
   favorites: string[];
   favorite: boolean;
@@ -33,7 +33,7 @@ export class TabsPage implements OnInit, OnDestroy {
       .subscribe(slide => {
         console.log('active slide changed', slide);
         this.url = slide ? slide.url : null;
-        this.title = slide ? slide.title : null;
+        this.articleID = slide ? slide.articleId : null;
         this.checkFav().then(result => this.favorite = result);
         this.checkCanActivate().then(result => {
           this.canActivate = result;
@@ -48,6 +48,7 @@ export class TabsPage implements OnInit, OnDestroy {
           this.canActivate = result;
         });
       } else {
+        this.canActivate = false;
         this.favorite = false;
       }
     });
@@ -59,7 +60,6 @@ export class TabsPage implements OnInit, OnDestroy {
   }
 
   handleTabSwitch() {
-
     this.state.activeTab.next(this.tabs.getSelected());
   }
 
@@ -85,9 +85,8 @@ export class TabsPage implements OnInit, OnDestroy {
 
 
   private async checkFav() {
-    const favs: { titles: string[] } = await this.getFavorites();
-    console.log('favs', favs, 'active', this.title);
-    return favs ? favs.titles.filter(item => item === this.title).length > 0 ? true : false
+    const favs: { articles: string[] } = await this.getFavorites();
+    return favs ? favs.articles.filter(item => item === this.articleID).length > 0 ? true : false
       : false;
 
   }
@@ -110,22 +109,22 @@ export class TabsPage implements OnInit, OnDestroy {
 
   private async setFavorite() {
     this.getFavorites().then(data => {
-      const favs: string[] = data ? data.titles : [];
+      const favs: string[] = data ? data.articles : [];
       let index = -1;
       favs.forEach((item, i) => {
-        if (item === this.title) {
+        if (item === this.articleID) {
           index = i;
         }
       });
 
-      index < 0 ? favs.push(this.title)
+      index < 0 ? favs.push(this.articleID)
         : favs.splice(index, 1);
 
-      console.log({ titles: favs });
+      console.log({ articles: favs });
 
       Storage.set({
         key: 'favorites',
-        value: JSON.stringify({ titles: favs })
+        value: JSON.stringify({ articles: favs })
       }).then(
         () => {
           this.checkFav().then(result => this.favorite = result);

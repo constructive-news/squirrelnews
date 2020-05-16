@@ -1,7 +1,7 @@
 <ion-slides #articleSlider (ionSlideDidChange)="handleSlideChange()">
   <ng-container *ngIf="articles && articles.length > 0; else noArticles">
     <ion-slide *ngFor="let article of articles" (click)="openBrowser(article.url)">
-      <app-article [article]="article"></app-article>
+      <app-article [article]="article" [issueTitle]="issue.title"></app-article>
     </ion-slide>
   </ng-container>
   <ion-slide *ngIf="hasMore">

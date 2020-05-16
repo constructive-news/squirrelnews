@@ -4,18 +4,18 @@
       'background-size': 'cover'
     }">
     <div class="photo-credit">
-      Foto: {{article.credit}}
+      {{ 'article.photo' | translate | async }} {{article.credit}}
     </div>
   </div>
   <div class="issue">
-    {{ article.issue }}
+    {{ issueTitle }}
   </div>
   <div class="content ion-text-left">
     <h2>{{ article.title }}</h2>
-    {{article.source}}
+    {{ article.source }}
     <p>
       {{ article.teaser }}
-      Mehr...
+      {{ 'article.more' | translate | async }}
     </p>
   </div>
 </div>
