@@ -16,7 +16,7 @@ import { StateService } from './shared/state.service';
 })
 export class AppComponent {
 
-  showSplash = true;
+  showSplash = false;
   flag = environment.flag;
 
   constructor(

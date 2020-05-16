@@ -46,7 +46,6 @@ export class MoreComponent implements OnInit {
 
   switchLanguage() {
     const lang = this.state.activeLang.value === 'de' ? 'en' : 'de';
-    console.log('new lang', lang);
     this.state.activeLang.next(lang);
   }
 
