@@ -36,7 +36,6 @@ export class AllPage implements OnInit {
   }
 
   expand(key) {
-    console.log(key);
     const issue = this.articles$.get(key);
     issue.expanded = !issue.expanded;
     this.articles$.set(key, issue);

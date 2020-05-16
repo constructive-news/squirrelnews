@@ -26,9 +26,7 @@ export class ArticleTeaserComponent implements AfterViewInit {
   ) { }
 
   ngAfterViewInit() {
-    console.log('article teaser view init');
     this.slider.getActiveIndex().then( index => {
-      console.log('index after init', index)
       this.state.activeSlideIndex.next(0);
     } );
 
@@ -39,9 +37,7 @@ export class ArticleTeaserComponent implements AfterViewInit {
   }
 
   handleSlideChange() {
-    console.log('slide changed');
     this.slider.getActiveIndex().then( index => {
-      console.log('active index', index);
       this.state.activeSlideIndex.next(index);
 
     }, (err) => {

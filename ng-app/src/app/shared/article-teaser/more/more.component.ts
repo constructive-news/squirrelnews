@@ -26,7 +26,6 @@ export class MoreComponent implements OnInit {
 
   ngOnInit() {
     this.issueIdx = parseInt(this.route.snapshot.paramMap.get('issueId'), 10) || 0;
-    console.log(this.issueIdx);
   }
 
   ionViewDidEnter() {

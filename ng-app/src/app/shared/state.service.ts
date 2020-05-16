@@ -14,6 +14,5 @@ export class StateService {
   public activeLang: BehaviorSubject<string> = new BehaviorSubject(navigator.language === 'de-DE' ? 'de' : 'en');
 
   constructor() {
-    console.log(navigator.language);
   }
 }

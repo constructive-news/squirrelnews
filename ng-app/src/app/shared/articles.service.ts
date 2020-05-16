@@ -26,10 +26,9 @@ export class ArticlesService {
       map(([lang, data]: any[]) => {
         // forget about the language and abort criteria: return empty array if index is out of issues
         const result = issueIndex < data.length ? data[issueIndex] : [];
-        console.log(issueIndex, data, issueIndex < data.length, result);
         return result;
       }),
-      tap(data => console.log('issue', data)),
+      // tap(data => console.log('issue', data)),
       switchMap((issue: any) =>
         // abort criteria: return empty stream if index is out of issueId does not exist
         zip(
@@ -38,7 +37,7 @@ export class ArticlesService {
         )
       ),
       map(([issue, articles]) => ({ issue, articles })),
-      tap(data => console.log('result', data))
+      // tap(data => console.log('result', data))
     );
   }
 
@@ -74,13 +73,13 @@ export class ArticlesService {
         zip( 
           of(JSON.parse(favs).articles),
           combineLatest(
-            [...issues.map(issue => this.db.collection(`issues/${issue.id}/articles`).valueChanges({ idField: 'id' }) ) ] )
+            [...issues.map(issue => this.db.collection(`issues/${issue.id}/articles`).valueChanges({ idField: 'articleId' }) ) ] )
             .pipe(
               map( data => data.reduce( (prev: any[], curr: any[]) => prev.concat(curr)) )
             )
         )
       ),
-      map( ([favs, articles]) => articles.filter( article => favs.includes(article.id) )),
+      map( ([favs, articles]) => articles.filter( article => favs.includes(article.articleId) )),
     )
   }
 

@@ -31,7 +31,6 @@ export class TabsPage implements OnInit, OnDestroy {
   ngOnInit() {
     this.state.activeSlide
       .subscribe(slide => {
-        console.log('active slide changed', slide);
         this.url = slide ? slide.url : null;
         this.articleID = slide ? slide.articleId : null;
         this.checkFav().then(result => this.favorite = result);
@@ -64,7 +63,6 @@ export class TabsPage implements OnInit, OnDestroy {
   }
 
   handleDoubleClick() {
-    console.log('dblclick');
     this.state.activeSlideIndex.next(0);
   }
 
@@ -92,7 +90,6 @@ export class TabsPage implements OnInit, OnDestroy {
   }
 
   private async checkCanActivate() {
-    console.log('check can activate', this.state.activeSlide.value, this.activeTab);
     if ( (this.state.activeSlide.value === null || this.state.activeSlide.value === undefined) &&
           this.ACTIVE_TABS.includes(this.activeTab)) {
       return false;
@@ -119,8 +116,6 @@ export class TabsPage implements OnInit, OnDestroy {
 
       index < 0 ? favs.push(this.articleID)
         : favs.splice(index, 1);
-
-      console.log({ articles: favs });
 
       Storage.set({
         key: 'favorites',
