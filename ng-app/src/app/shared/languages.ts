@@ -15,7 +15,7 @@ export const DE = {
   links: {
     instagram: 'https://www.instagram.com/squirrelnews.de/',
     twitter: 'https://twitter.com/squirrelnews_de',
-    facebook: 'https://twitter.com/squirrelnews_de'
+    facebook: 'https://www.facebook.com/squirrelnews.de'
   },
   privacyPolicy: {
     name: 'Datenschutz',
@@ -47,7 +47,7 @@ export const EN = {
   issues: {
     all: 'All Issues',
     previous: 'Previous Issue',
-    favorites: 'Favorites',
+    favorites: 'Favourites',
     noMoreIssue: 'Unfortunately, no more issues exist.'
   },
   lang: {
@@ -71,7 +71,7 @@ export const EN = {
     url: 'https://squirrel-news.net/contact/'
   },
   support: {
-    name: 'Support',
+    name: 'Support us',
     url: 'https://squirrel-news.net/support-us/'
   },
   about: {

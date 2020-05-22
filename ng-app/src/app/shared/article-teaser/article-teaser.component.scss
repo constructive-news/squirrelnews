@@ -3,6 +3,10 @@ ion-slides {
   height: 100%;
 }
 
+.swiper-slide {
+  height: calc(100vh - 95px);
+}
+
 .logo-image {
   margin-top: 30%;
   padding: 50px;

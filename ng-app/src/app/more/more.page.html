@@ -5,18 +5,29 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid style="margin-top: 20%;">
-    <!-- <ion-row>
-      <ion-col size="8" offset="2" class="ion-align-self-center">
-        <img src="../../assets/icon/sn-logo.svg" alt="Squirrel News Logo">
-      </ion-col>
-    </ion-row> -->
+  <ion-grid style="margin-top: 20vh;">
     <ion-row></ion-row>
     <ion-row>
-      <ion-col size="8" offset="2" class="ion-align-self-center"
-      (click)="openInBrowser('privacyPolicy.url')">
+      <ion-col size="8" offset="2"
+      (click)="switchLanguage()">
         <h2>
-          {{ 'privacyPolicy.name' | translate | async }}
+          {{ 'lang.switch' | translate | async }}
+        </h2>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="8" offset="2" class="ion-align-self-center"
+      (click)="openInBrowser('about.url')" >
+        <h2>
+          {{ 'about.name' | translate | async }}
+        </h2>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="8" offset="2" class="ion-align-self-center"
+      (click)="openInBrowser('support.url')" >
+        <h2>
+          {{ 'support.name' | translate | async }}
         </h2>
       </ion-col>
     </ion-row>
@@ -30,55 +41,12 @@
     </ion-row>
     <ion-row>
       <ion-col size="8" offset="2" class="ion-align-self-center"
-      (click)="openInBrowser('support.url')" >
+      (click)="openInBrowser('privacyPolicy.url')">
         <h2>
-          {{ 'support.name' | translate | async }}
+          {{ 'privacyPolicy.name' | translate | async }}
         </h2>
       </ion-col>
     </ion-row>
-    
-    <ion-row>
-      <ion-col size="8" offset="2" class="ion-align-self-center"
-      (click)="openInBrowser('about.url')" >
-        <h2>
-          {{ 'about.name' | translate | async }}
-        </h2>
-      </ion-col>
-    </ion-row>
-
-    <!-- <ion-row>
-      <ion-col size="8" offset="2"
-      (click)="openFavorites()">
-        <h2>
-          {{ 'issues.favorites' | translate | async }}
-        </h2>
-      </ion-col>
-    </ion-row> -->
-    <ion-row>
-      <ion-col size="8" offset="2"
-      (click)="switchLanguage()">
-        <h2>
-          {{ 'lang.switch' | translate | async }}
-        </h2>
-      </ion-col>
-    </ion-row>
-    <!-- <ion-row class="social-media"> 
-      <ion-col size="3" offset="2">
-        <a href="">
-          <ion-icon name="logo-facebook" size="large"></ion-icon>
-        </a>
-      </ion-col>
-      <ion-col size="3">
-        <a href="https://www.instagram.com/squirrelnews.de/">
-          <ion-icon name="logo-instagram" size="large"></ion-icon>
-        </a>
-      </ion-col>
-      <ion-col size="3">
-        <a href="https://twitter.com/squirrelnews_de">
-          <ion-icon name="logo-twitter" size="large"></ion-icon>
-        </a>
-      </ion-col>
-    </ion-row> -->
   </ion-grid>
 
 </ion-content>
