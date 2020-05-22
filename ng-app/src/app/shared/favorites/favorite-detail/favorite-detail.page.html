@@ -1,15 +1,16 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar class="home">
     <ion-buttons slot="start">
       <ion-back-button
         icon="arrow-back-outline"
         text=""
+        color="light"
         (click)="handleBack()"></ion-back-button>
     </ion-buttons>
-    <ion-title>{{ 'issues.favorites' | translate | async }}</ion-title>
+    <!-- <ion-title>{{ 'issues.favorites' | translate | async }}</ion-title> -->
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <app-article [article]="article"></app-article>
+  <app-article intended="true" [article]="article"></app-article>
 </ion-content>

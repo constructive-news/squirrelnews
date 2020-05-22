@@ -40,6 +40,8 @@ export class HomePage implements AfterViewInit {
         index === null
                           ? this.state.activeSlide.next(this.currentArticles[0])
                           : this.state.activeSlide.next(this.currentArticles[index])
+        // this.state.activeSlide.next(this.currentArticles[0]);
+        // this.state.activeSlideIndex.next(0);
     });
 
     this.state.activeTab.next('home');

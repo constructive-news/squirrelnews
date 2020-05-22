@@ -1,18 +1,11 @@
-<ion-header collapse="condense">
-  <ion-toolbar *ngIf="this.state.activeSlide.value; else altToolbar" class="home">
-    <ion-title size="large">
+<ion-header>
+  <ion-toolbar class="home">
+    <ion-title>
       <!-- <span class="title"> -->
-        <img id="logo" src="../../assets/icon/sn-logo-name.svg" height="76" alt="Squirrel News Logo with text">
       <!-- </span> -->
     </ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content fullscreen>
-  <app-article-teaser [issue]="issue" [articles]="currentArticles" [hasMore]="true" ></app-article-teaser>
+  <app-article-teaser [intended]="false" [issue]="issue" [articles]="currentArticles" [hasMore]="true" ></app-article-teaser>
 </ion-content>
-
-<ng-template #altToolbar>
-  <ion-toolbar color="primary">
-    <ion-title>Squirrel News</ion-title>
-  </ion-toolbar>
-</ng-template>

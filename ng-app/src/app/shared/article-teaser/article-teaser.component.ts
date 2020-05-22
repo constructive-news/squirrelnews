@@ -3,6 +3,7 @@ import { Article } from 'src/app/home/article';
 import { Plugins } from '@capacitor/core';
 import { StateService } from '../state.service';
 import { IonSlides } from '@ionic/angular';
+import { skip, tap } from 'rxjs/operators';
 
 
 const { Browser } = Plugins;
@@ -17,6 +18,8 @@ export class ArticleTeaserComponent implements AfterViewInit {
   @Input() articles: Article[];
   @Input() issue: any;
   @Input() hasMore: boolean;
+  @Input() intended: boolean;
+  
   @Output() notifySlideChanged = new EventEmitter<number>();
 
   @ViewChild('articleSlider') slider: IonSlides;
@@ -30,6 +33,10 @@ export class ArticleTeaserComponent implements AfterViewInit {
       this.state.activeSlideIndex.next(0);
     } );
 
+    this.state.activeLang.pipe(
+      skip(1),
+      tap( () => this.slider.slideTo(0))
+    ).subscribe()
   }
 
   async openBrowser(url) {
@@ -44,5 +51,7 @@ export class ArticleTeaserComponent implements AfterViewInit {
       console.log('something went wrong', err);
     });
   }
+
+
 
 }

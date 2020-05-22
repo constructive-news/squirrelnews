@@ -7,6 +7,8 @@ import { HomePage } from './home.page';
 import { ArticlesService } from '../shared/articles.service';
 import { ArticleDetailComponent } from './article-detail/article-detail.component';
 import { SharedModule } from '../shared/shared.module';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { BackendInterceptor } from '../shared/backend.interceptor';
 
 @NgModule({
   imports: [
@@ -35,6 +37,9 @@ import { SharedModule } from '../shared/shared.module';
   ],
   declarations: [HomePage, ArticleDetailComponent],
   entryComponents: [ArticleDetailComponent],
-  providers: [ArticlesService]
+  providers: [
+    ArticlesService,
+    { provide: HTTP_INTERCEPTORS, useClass: BackendInterceptor, multi: true }
+  ]
 })
 export class HomePageModule {}

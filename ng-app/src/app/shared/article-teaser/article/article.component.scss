@@ -18,12 +18,13 @@
   writing-mode: vertical-rl;
   text-orientation: sideways !important;
   text-align: start;
-  left: 92vw;
+  left: 95vw;
   color: #fff;
   transform: rotate(180deg);
   text-overflow: ellipsis;
-  height: 50vh;
+  height: 355px ;
   top: -10px;
+  font-size: small;
 }
 
 .header-box {
@@ -47,6 +48,18 @@
   margin-right: 5px;
 }
 
+.logo {
+  position: absolute;
+  top: 50px;
+  left: 10px;
+  padding: 10px;
+  height: 70px;
+}
+
+.logo.intended {
+  left: 30px;
+}
+
 .title {
   text-align: left;
   width: 60px;
@@ -55,4 +68,11 @@
 .content {
   padding: 0 10px 20px 10px;
   // margin-bottom: 20px;
+  h2 {
+    font-size: 22px;
+  }
+
+  p {
+    font-size: 16px;
+  }
 }

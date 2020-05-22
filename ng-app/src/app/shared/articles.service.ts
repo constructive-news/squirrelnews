@@ -70,7 +70,7 @@ export class ArticlesService {
         return zip( of(favs), this.db.collection('issues').valueChanges({idField: 'id'}))
       }),
       switchMap( ([favs, issues] ) =>
-        zip( 
+        zip(
           of(JSON.parse(favs).articles),
           combineLatest(
             [...issues.map(issue => this.db.collection(`issues/${issue.id}/articles`).valueChanges({ idField: 'articleId' }) ) ] )

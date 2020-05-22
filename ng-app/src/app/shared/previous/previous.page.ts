@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ArticlesService } from 'src/app/shared/articles.service';
 import { StateService } from 'src/app/shared/state.service';
 import { Article } from 'src/app/home/article';
-import { IonSlides, NavController } from '@ionic/angular';
 import { Plugins } from '@capacitor/core';
 import { Subscription, combineLatest } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';

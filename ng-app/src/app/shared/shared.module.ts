@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 import { SafePipe } from './safe.pipe';
 import { ArticleComponent } from './article-teaser/article/article.component';
 import { IonicModule } from '@ionic/angular';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TranslatePipe } from './translate.pipe';
 import { ArticleTeaserComponent } from './article-teaser/article-teaser.component';
 import { MoreComponent } from './article-teaser/more/more.component';
+import { BackendInterceptor } from './backend.interceptor';
 
 
 @NgModule({
@@ -22,6 +23,9 @@ import { MoreComponent } from './article-teaser/more/more.component';
     IonicModule,
     HttpClientModule,
   ],
-  exports: [SafePipe, TranslatePipe, ArticleTeaserComponent, ArticleComponent]
+  exports: [SafePipe, TranslatePipe, ArticleTeaserComponent, ArticleComponent],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: BackendInterceptor, multi: true }
+  ]
 })
 export class SharedModule { }

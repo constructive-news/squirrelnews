@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef, AfterViewInit, AfterContentInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Plugins } from '@capacitor/core';
 import { StateService } from '../shared/state.service';
 import { ToastController, IonTabs } from '@ionic/angular';

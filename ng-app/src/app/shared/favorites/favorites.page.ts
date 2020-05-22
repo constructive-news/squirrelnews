@@ -28,7 +28,7 @@ export class FavoritesPage {
     this.favorites = this.articles.getFavorites2();
     this.state.activeTab.next('fav-list');
     this.state.activeSlide.next(null);
-    this.articles.getFavorites2().subscribe();
+    // this.articles.getFavorites2().subscribe();
   }
 
   ionViewWillLeave() {

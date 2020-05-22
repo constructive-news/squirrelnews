@@ -1,7 +1,7 @@
 <ion-slides #articleSlider (ionSlideDidChange)="handleSlideChange()">
   <ng-container *ngIf="articles && articles.length > 0; else noArticles">
     <ion-slide *ngFor="let article of articles" (click)="openBrowser(article.url)">
-      <app-article [article]="article" [issueTitle]="issue.title"></app-article>
+      <app-article [intended]="intended" [article]="article" [issueTitle]="issue.title"></app-article>
     </ion-slide>
   </ng-container>
   <ion-slide *ngIf="hasMore">
@@ -10,10 +10,11 @@
 </ion-slides>
 
 <ng-template #noArticles>
+
   <ion-slide>
     <div class="wrapper-article">
-      <img class="logo-image" src="assets/icon/squirrel-news-logo.svg" alt="Squirrel News Logo">
-      {{ 'issues.noMoreIssue' | translate | async }}
+        <img class="logo-image" src="assets/icon/squirrel-news-logo.svg" alt="Squirrel News Logo">
+        {{ 'issues.noMoreIssue' | translate | async }}
     </div>
   </ion-slide>
 </ng-template>

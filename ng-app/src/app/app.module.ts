@@ -25,7 +25,7 @@ import { SharedModule } from './shared/shared.module';
     IonicModule.forRoot({ mode: 'ios'}),
     AppRoutingModule,
     AngularFireModule.initializeApp(firebaseConfig),
-    AngularFirestoreModule,
+    AngularFirestoreModule.enablePersistence(),
     SharedModule
   ],
   providers: [

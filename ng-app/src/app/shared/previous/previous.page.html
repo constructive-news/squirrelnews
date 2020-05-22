@@ -1,16 +1,17 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title *ngIf="issue">{{ issue.title }}</ion-title>
-    <ion-title *ngIf="!issue">{{ 'issues.previous' | translate | async }}</ion-title>
+  <ion-toolbar class="home">
+    <!-- <ion-title *ngIf="issue">{{ issue.title }}</ion-title>
+    <ion-title *ngIf="!issue">{{ 'issues.previous' | translate | async }}</ion-title> -->
     <ion-buttons slot="start">
       <ion-back-button
         icon="arrow-back-outline"
         text=""
+        color="light"
         (click)="handleBack()"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content fullscreen>
-  <app-article-teaser [issue]="issue" [articles]="currentArticles" [hasMore]="true" ></app-article-teaser>
+  <app-article-teaser intended="true" [issue]="issue" [articles]="currentArticles" [hasMore]="true" ></app-article-teaser>
 </ion-content>
