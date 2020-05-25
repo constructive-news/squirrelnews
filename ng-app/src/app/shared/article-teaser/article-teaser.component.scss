@@ -1,10 +1,10 @@
 ion-slides {
-  top: -95px;
-  height: calc(100vh + 95px);
+  top: -90px;
 }
 
 .swiper-slide {
-  height: calc(100vh - 95px);
+  // height: calc(100vh - 95px);
+  height: calc(100% - 50px);
 }
 
 .logo-image {

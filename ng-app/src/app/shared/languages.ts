@@ -71,7 +71,7 @@ export const EN = {
     url: 'https://squirrel-news.net/contact/'
   },
   support: {
-    name: 'Support us',
+    name: 'Support Us',
     url: 'https://squirrel-news.net/support-us/'
   },
   about: {

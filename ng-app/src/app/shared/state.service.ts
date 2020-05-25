@@ -11,7 +11,7 @@ export class StateService {
   public activeSlideIndex: BehaviorSubject<number> = new BehaviorSubject(null);
   public activeTab: BehaviorSubject<string> = new BehaviorSubject(null);
   public acticeFav: BehaviorSubject<boolean> = new BehaviorSubject(true);
-  public activeLang: BehaviorSubject<string> = new BehaviorSubject(navigator.language === 'de-DE' ? 'de' : 'en');
+  public activeLang: BehaviorSubject<string> = new BehaviorSubject(navigator.language === 'de' || navigator.language === 'de-DE' ? 'de' : 'en');
 
   constructor() {
   }

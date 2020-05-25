@@ -28,10 +28,6 @@ export class MoreComponent implements OnInit {
     this.issueIdx = parseInt(this.route.snapshot.paramMap.get('issueId'), 10) || 0;
   }
 
-  ionViewDidEnter() {
-    this.state.activeTab.next('more');
-  }
-
   openAll() {
     this.nav.navigateForward('tabs/home/all');
   }

@@ -2,13 +2,17 @@ import { Component } from '@angular/core';
 
 import { Platform, NavController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { StatusBar as StatusBarConfig } from '@ionic-native/status-bar/ngx';
 
 import { timer } from 'rxjs';
+
+import { Plugins, StatusBarStyle } from '@capacitor/core';
 
 import { environment } from '../environments/environment';
 import { StateService } from './shared/state.service';
 import { switchMap, tap, skip } from 'rxjs/operators';
+
+const { StatusBar } = Plugins
 
 @Component({
   selector: 'app-root',
@@ -23,7 +27,7 @@ export class AppComponent {
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar,
+    private statusBar: StatusBarConfig,
     private state: StateService,
     private nav: NavController,
   ) {
@@ -47,9 +51,12 @@ export class AppComponent {
           this.showSplash = false;
           this.nav.navigateRoot('/');
         }),
-      ).subscribe( () => {
-        console.log('lang switch')
-      })
+      ).subscribe();
+
+      StatusBar.setStyle({
+        style: StatusBarStyle.Dark
+      });
+
     });
   }
 }
