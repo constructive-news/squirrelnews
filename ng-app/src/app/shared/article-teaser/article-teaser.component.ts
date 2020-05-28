@@ -47,6 +47,7 @@ export class ArticleTeaserComponent implements AfterViewInit {
     this.slider.getActiveIndex().then( index => {
       this.state.activeSlideIndex.next(index);
 
+
     }, (err) => {
       console.log('something went wrong', err);
     });

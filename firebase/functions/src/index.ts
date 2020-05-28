@@ -85,11 +85,38 @@ export const createNewIssue = functions.https.onRequest(async (request, response
   }
 });
 
+export const deleteArticle = functions.https.onRequest( async (request, response) => {
+  const tokenAccepted = await checkToken(request.headers['token']);
+  if (request.method === 'DELETE' && tokenAccepted) {
+    // we need issue id and article id
+    if (!request.body.issueId || !request.body.articleId) {
+      response.status(400).send('no correct request body');
+    } else {
+      const result = await admin.firestore().doc(`issues/${request.body.issueId}/articles/${request.body.articleId}`).delete();
+      
+      if (result) {
+        response.status(200).json({
+          message: `success`,
+          deleted: result
+        });
+      } else {
+        response.status(418).json({
+          message: 'error, something wrong happened',
+        })
+      }
+    }
+  } else {
+    response.status(400).send('Bad Request');
+  }
+})
+
 export const getArticle = functions.https.onRequest( async (request, response) => {
   const tokenAccepted = await checkToken(request.headers['token']);
   if ( request.method === 'GET' && tokenAccepted) {
     
     // console.log(collections);
+  } else {
+    response.status(400).send('Bad Request');
   }
 });
 

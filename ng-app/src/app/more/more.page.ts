@@ -37,6 +37,18 @@ export class MorePage implements OnInit {
     });
   }
 
+  openInExternalBrowser(id: string) {
+
+    const translate = new TranslatePipe(this.state);
+    translate.transform(id).pipe(
+      take(1)
+    ).subscribe( url => {
+      window.open(url, '_system', 'location=yes' );
+
+    })
+
+  }
+
   switchLanguage() {
     const lang = this.state.activeLang.value === 'de' ? 'en' : 'de';
     this.state.activeLang.next(lang);
