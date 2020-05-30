@@ -19,11 +19,13 @@ export const DE = {
   },
   privacyPolicy: {
     name: 'Datenschutz',
-    url: 'https://squirrel-news.net/de/datenschutz/'
+    url: 'https://squirrel-news.net/de/datenschutz/',
+    path: 'privacy-de'
   },
   imprint: {
     name: 'Impressum',
-    url: 'https://squirrel-news.net/de/impressum/'
+    url: 'https://squirrel-news.net/de/impressum/',
+    path: 'imprint-de'
   },
   contact: {
     name: 'Kontakt',
@@ -35,7 +37,8 @@ export const DE = {
   },
   about: {
     name: 'Über uns',
-    url: 'https://squirrel-news.net/de/ueber-uns/'
+    url: 'https://squirrel-news.net/de/ueber-uns/',
+    path: 'about-de'
   }
 };
 
@@ -60,11 +63,13 @@ export const EN = {
   },
   privacyPolicy: {
     name: 'Privacy Policy',
-    url: 'https://squirrel-news.net/privacy-policy/'
+    url: 'https://squirrel-news.net/privacy-policy/',
+    path: 'privacy-en'
   },
   imprint: {
     name: 'Imprint',
-    url: 'https://squirrel-news.net/imprint/'
+    url: 'https://squirrel-news.net/imprint/',
+    path: 'imprint-en'
   },
   contact: {
     name: 'Contact',
@@ -76,6 +81,7 @@ export const EN = {
   },
   about: {
     name: 'About Us',
-    url: 'https://squirrel-news.net/about-us/'
+    url: 'https://squirrel-news.net/about-us/',
+    path: 'about-en'
   }
 };

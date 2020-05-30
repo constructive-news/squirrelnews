@@ -17,7 +17,8 @@ const { Browser } = Plugins;
 export class MorePage implements OnInit {
 
   constructor(
-    private state: StateService
+    private state: StateService,
+    private nav: NavController
   ) { }
 
   ngOnInit() {
@@ -46,7 +47,16 @@ export class MorePage implements OnInit {
       window.open(url, '_system', 'location=yes' );
 
     })
+  }
 
+  open(path: string) {
+    const translate = new TranslatePipe(this.state);
+    translate.transform(path).pipe(
+      take(1)
+    ).subscribe( p => {
+      this.nav.navigateForward(`tabs/more/${p}`);
+
+    })
   }
 
   switchLanguage() {

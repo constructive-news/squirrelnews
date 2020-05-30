@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar color="dark">
+  <ion-toolbar color="primary">
     <ion-title>Squirrel News</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -17,7 +17,7 @@
     </ion-row>
     <ion-row>
       <ion-col size="8" offset="2" class="ion-align-self-center"
-      (click)="openInBrowser('about.url')" >
+      (click)="open('about.path')" >
         <h2>
           {{ 'about.name' | translate | async }}
         </h2>
@@ -33,7 +33,7 @@
     </ion-row>
     <ion-row>
       <ion-col size="8" offset="2" class="ion-align-self-center"
-      (click)="openInBrowser('imprint.url')" >
+      (click)="open('imprint.path')" >
         <h2>
           {{ 'imprint.name' | translate | async }}
         </h2>
@@ -41,7 +41,7 @@
     </ion-row>
     <ion-row>
       <ion-col size="8" offset="2" class="ion-align-self-center"
-      (click)="openInBrowser('privacyPolicy.url')">
+      (click)="open('privacyPolicy.path')">
         <h2>
           {{ 'privacyPolicy.name' | translate | async }}
         </h2>
