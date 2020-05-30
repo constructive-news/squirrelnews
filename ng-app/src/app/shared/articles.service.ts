@@ -5,6 +5,7 @@ import { tap, map, switchMap } from 'rxjs/operators';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Plugins } from '@capacitor/core';
 import { StateService } from './state.service';
+import { REFERENCE_PREFIX } from '@angular/compiler/src/render3/view/util';
 
 const { Storage } = Plugins;
 @Injectable()
@@ -33,7 +34,7 @@ export class ArticlesService {
         // abort criteria: return empty stream if index is out of issueId does not exist
         zip(
           of(issue),
-          issue.issueId ? this.db.collection(`issues/${issue.issueId}/articles`).valueChanges({ idField: 'articleId' }) : of([])
+          issue.issueId ? this.db.collection(`issues/${issue.issueId}/articles`, ref => ref.orderBy('position')).valueChanges({ idField: 'articleId' }) : of([])
         )
       ),
       map(([issue, articles]) => ({ issue, articles })),

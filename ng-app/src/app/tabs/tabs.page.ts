@@ -1,9 +1,13 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { Plugins } from '@capacitor/core';
+import { Plugins, PushNotificationToken, PushNotification, PushNotificationActionPerformed } from '@capacitor/core';
 import { StateService } from '../shared/state.service';
 import { ToastController, IonTabs } from '@ionic/angular';
 
-const { Share, Storage } = Plugins;
+const {
+  Share,
+  Storage,
+  PushNotifications
+} = Plugins;
 @Component({
   selector: 'app-tabs',
   templateUrl: './tabs.page.html',
@@ -51,6 +55,43 @@ export class TabsPage implements OnInit, OnDestroy {
         this.favorite = false;
       }
     });
+
+    PushNotifications.requestPermission().then(result => {
+      if (result.granted) {
+        // Register with Apple / Google to receive push via APNS/FCM
+        PushNotifications.register();
+      } else {
+        // Show some error
+        console.log('error requesting permission');
+        // On success, we should be able to receive notifications
+        PushNotifications.addListener('registration',
+          (token: PushNotificationToken) => {
+            alert('Push registration success, token: ' + token.value);
+          }
+        );
+
+        // Some issue with our setup and push will not work
+        PushNotifications.addListener('registrationError',
+          (error: any) => {
+            alert('Error on registration: ' + JSON.stringify(error));
+          }
+        );
+
+        // Show us the notification payload if the app is open on our device
+        PushNotifications.addListener('pushNotificationReceived',
+          (notification: PushNotification) => {
+            alert('Push received: ' + JSON.stringify(notification));
+          }
+        );
+
+        // Method called when tapping on a notification
+        PushNotifications.addListener('pushNotificationActionPerformed',
+          (notification: PushNotificationActionPerformed) => {
+            alert('Push action performed: ' + JSON.stringify(notification));
+          }
+        );
+      }
+    });
   }
 
   ngOnDestroy() {
@@ -90,8 +131,8 @@ export class TabsPage implements OnInit, OnDestroy {
   }
 
   private async checkCanActivate() {
-    if ( (this.state.activeSlide.value === null || this.state.activeSlide.value === undefined) &&
-          this.ACTIVE_TABS.includes(this.activeTab)) {
+    if ((this.state.activeSlide.value === null || this.state.activeSlide.value === undefined) &&
+      this.ACTIVE_TABS.includes(this.activeTab)) {
       return false;
     } else if (this.ACTIVE_TABS.includes(this.activeTab)) {
       return true;

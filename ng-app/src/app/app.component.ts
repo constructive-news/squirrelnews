@@ -12,7 +12,10 @@ import { environment } from '../environments/environment';
 import { StateService } from './shared/state.service';
 import { switchMap, tap, skip } from 'rxjs/operators';
 
-const { StatusBar } = Plugins
+const { 
+  StatusBar,
+} = Plugins;
+
 
 @Component({
   selector: 'app-root',

@@ -49,6 +49,10 @@ export class MorePage implements OnInit {
     })
   }
 
+  openFavorites() {
+    this.nav.navigateForward('tabs/home/favorites');
+  }
+
   open(path: string) {
     const translate = new TranslatePipe(this.state);
     translate.transform(path).pipe(
