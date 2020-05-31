@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "ng-app"
+		},
+		{
+			"path": "firebase"
+		}
+	],
+	"settings": {
+		"deno.enable": false
+	}
+}

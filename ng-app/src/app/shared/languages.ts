@@ -39,6 +39,11 @@ export const DE = {
     name: 'Über uns',
     url: 'https://squirrel-news.net/de/ueber-uns/',
     path: 'about-de'
+  },
+  share: {
+    title: 'News teilen!',
+    text: 'Schau dir das mal an...',
+    noSharingOptionAvailable: 'Keine Funktion zum Teilen verfügbar'
   }
 };
 
@@ -83,5 +88,10 @@ export const EN = {
     name: 'About Us',
     url: 'https://squirrel-news.net/about-us/',
     path: 'about-en'
+  },
+  share: {
+    title: 'share the news!',
+    text: 'Have a look...',
+    noSharingOptionAvailable: 'No functionality to share available'
   }
 };

@@ -1,1 +1,2 @@
-ng-app/ios/App/GoogleService-Info.plist
+ng-app/ios/App/App/GoogleService-Info.plist
+.DS_Store

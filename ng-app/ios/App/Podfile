@@ -14,7 +14,7 @@ def capacitor_pods
   # Do not delete
 end
 
-target 'Squirrel News' do
+target 'App' do
   capacitor_pods
   # Add your Pods here
   pod 'Firebase/Messaging'

@@ -9,48 +9,62 @@
     <ion-row>
       <ion-col size="8" offset="2"
       (click)="switchLanguage()">
+      <ion-button fill="clear" color="dark" expand="block">
         <h2>
           {{ 'lang.switch' | translate | async }}
         </h2>
+      </ion-button>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col size="8" offset="2" (click)="openFavorites()">
-        <h2>
-          {{ 'issues.favorites' | translate | async }}
-        </h2>
+        <ion-button fill="clear" color="dark" expand="block">
+          <h2>
+            {{ 'issues.favorites' | translate | async }}
+          </h2>
+        </ion-button>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col size="8" offset="2" class="ion-align-self-center"
-      (click)="open('about.path')" >
-        <h2>
-          {{ 'about.name' | translate | async }}
-        </h2>
+        (click)="open('about.path')" >
+        <ion-button fill="clear" color="dark" expand="block">
+          <h2>
+            {{ 'about.name' | translate | async }}
+          </h2>
+        </ion-button>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col size="8" offset="2" class="ion-align-self-center"
       (click)="openInExternalBrowser('support.url')" >
+      <ion-button fill="clear" color="dark" expand="block">
         <h2>
           {{ 'support.name' | translate | async }}
         </h2>
+      </ion-button>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col size="8" offset="2" class="ion-align-self-center"
       (click)="open('imprint.path')" >
-        <h2>
-          {{ 'imprint.name' | translate | async }}
-        </h2>
+        <ion-button fill="clear" color="dark" expand="block">
+          
+          <h2>
+            {{ 'imprint.name' | translate | async }}
+          </h2>
+        </ion-button>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col size="8" offset="2" class="ion-align-self-center"
       (click)="open('privacyPolicy.path')">
-        <h2>
-          {{ 'privacyPolicy.name' | translate | async }}
-        </h2>
+        <ion-button fill="clear" color="dark" expand="block">
+
+          <h2>
+            {{ 'privacyPolicy.name' | translate | async }}
+          </h2>
+        </ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>
