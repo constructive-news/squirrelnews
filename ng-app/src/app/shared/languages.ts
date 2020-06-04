@@ -1,7 +1,7 @@
 export const DE = {
   article: {
     more: 'Mehr...',
-    photo: 'Foto:'
+    photo: 'Foto'
   },
   issues: {
     all: 'Alle Ausgaben',
@@ -50,7 +50,7 @@ export const DE = {
 export const EN = {
   article: {
     more: 'More...',
-    photo: 'photo:'
+    photo: 'photo'
   },
   issues: {
     all: 'All Issues',

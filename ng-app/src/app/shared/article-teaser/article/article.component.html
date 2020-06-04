@@ -1,12 +1,12 @@
 <div class="wrapper-article">
   <img class="logo" [ngClass]="{ 'intended': intended }" src="../../assets/icon/sn-logo-name.svg" height="76" alt="Squirrel News Logo with text">
+  <div class="photo-credit">
+    {{ 'article.photo' | translate | async }}: {{article.credit}}
+  </div>
   <div class="wrapper-image" [ngStyle]="{ 
       'background': 'url(' + article.imageUrl + ') no-repeat top center',
       'background-size': 'cover'
     }">
-    <div class="photo-credit">
-      {{ 'article.photo' | translate | async }} {{article.credit}}
-    </div>
   </div>
   <div class="issue">
     {{ issueTitle }}
