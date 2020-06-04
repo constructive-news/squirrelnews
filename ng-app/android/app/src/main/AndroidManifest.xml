@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
+      
+        
         <activity
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|smallestScreenSize|screenLayout|uiMode"
             android:name="org.constructivenews.squirrelnews.MainActivity"
@@ -41,7 +42,7 @@
                 android:resource="@xml/file_paths"></meta-data>
         </provider>
     </application>
-
+    <meta-data android:name="com.google.firebase.messaging.default_notification_icon" android:resource="@mipmap/ic_launcher_round" />
     <!-- Permissions -->
 
     <uses-permission android:name="android.permission.INTERNET" />

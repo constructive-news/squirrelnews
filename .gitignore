@@ -1,2 +1,3 @@
 ng-app/ios/App/App/GoogleService-Info.plist
+ng-app/android/app/google-services.json
 .DS_Store
