@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Article } from 'src/app/home/article';
 import { StateService } from 'src/app/shared/state.service';
+import { Plugins } from '@capacitor/core';
+
+const { Browser } = Plugins;
 
 @Component({
   selector: 'app-favorite-detail',
@@ -28,6 +31,10 @@ export class FavoriteDetailPage implements OnInit {
   handleBack() {
     this.state.activeTab.next('fav-list');
     this.state.activeSlide.next(null);
+  }
+
+  async openBrowser(url) {
+    await Browser.open({ url });
   }
 
 }

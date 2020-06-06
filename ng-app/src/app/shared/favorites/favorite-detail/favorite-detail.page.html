@@ -12,5 +12,8 @@
 </ion-header>
 
 <ion-content fullscreen>
-  <app-article intended="true" [article]="article"></app-article>
+  <app-article 
+    intended="true"
+    (click)="openBrowser(article.url)"
+    [article]="article"></app-article>
 </ion-content>

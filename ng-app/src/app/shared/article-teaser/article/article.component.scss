@@ -9,18 +9,13 @@
 }
 
 .photo-credit {
-  // display:inline-block;
   position: absolute;
-  // writing-mode: vertical-rl;
-  // text-orientation: sideways !important;
   text-align: right;
   margin-right: 5px;
   top: 51vh;
   width: calc(100% - 10px);
   color: #fff;
-  // transform: rotate(180deg);
   text-overflow: ellipsis;
-  // height: 31vh ;
   font-size: small;
 }
 
