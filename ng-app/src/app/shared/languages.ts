@@ -50,7 +50,7 @@ export const DE = {
 export const EN = {
   article: {
     more: 'More...',
-    photo: 'photo'
+    photo: 'Photo'
   },
   issues: {
     all: 'All Issues',
