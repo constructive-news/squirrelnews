@@ -12,8 +12,8 @@
   position: absolute;
   text-align: right;
   margin-right: 5px;
-  top: 51vh;
-  width: calc(100% - 10px);
+  top: 52vh;
+  width: calc(100% - 15px);
   color: #fff;
   text-overflow: ellipsis;
   font-size: small;
@@ -29,7 +29,7 @@
 .issue {
   position: absolute;
   top: 60px;
-  left: calc(100vw - 100px);
+  left: calc(100% - 72px);
   font-size: 14px;
   color: #fff;
 }
