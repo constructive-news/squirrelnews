@@ -3,8 +3,8 @@ import { Plugins, PushNotificationToken, PushNotification, PushNotificationActio
 import { StateService } from '../shared/state.service';
 import { ToastController, IonTabs } from '@ionic/angular';
 import { TranslatePipe } from '../shared/translate.pipe';
-import { withLatestFrom } from 'rxjs/operators';
-import { combineLatest } from 'rxjs';
+import { withLatestFrom, tap } from 'rxjs/operators';
+import { combineLatest, pipe } from 'rxjs';
 
 const {
   Share,

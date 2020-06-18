@@ -25,6 +25,7 @@ export class PreviousPage {
   ) { }
 
   ionViewWillEnter() {
+    this.state.loading.next(true);
     this.articlesSubscription =
       combineLatest(
           [ this.articlesService.getCurrentIssue2(parseInt(this.route.snapshot.paramMap.get('issueId'), 10)),
@@ -35,7 +36,8 @@ export class PreviousPage {
             const index = result[1];
             index === null
                               ? this.state.activeSlide.next(this.currentArticles[0])
-                              : this.state.activeSlide.next(this.currentArticles[index])
+                              : this.state.activeSlide.next(this.currentArticles[index]);
+            this.state.loading.next(false);
     });
   }
 

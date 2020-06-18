@@ -12,7 +12,7 @@ import { environment } from '../environments/environment';
 import { StateService } from './shared/state.service';
 import { switchMap, tap, skip } from 'rxjs/operators';
 
-const { 
+const {
   StatusBar,
 } = Plugins;
 
@@ -36,7 +36,7 @@ export class AppComponent {
   ) {
     this.initializeApp();
 
-    timer(3000).subscribe( () => this.showSplash = false);
+    timer(3000).subscribe(() => this.showSplash = false);
 
   }
 
@@ -46,11 +46,11 @@ export class AppComponent {
       this.splashScreen.hide();
       this.state.activeLang.pipe(
         skip(1),
-        tap( () => {
+        tap(() => {
           this.showSplash = true;
         }),
-        switchMap( () => timer(2000) ),
-        tap( () => {
+        switchMap(() => timer(2000)),
+        tap(() => {
           this.showSplash = false;
           this.nav.navigateRoot('/');
         }),
@@ -59,6 +59,17 @@ export class AppComponent {
       StatusBar.setStyle({
         style: StatusBarStyle.Dark
       });
+
+      this.state.loading
+        .pipe(
+          tap(event => this.showSplash = event)
+        )
+        .subscribe();
+
+      this.platform.backButton.subscribe(() => {
+        // tslint:disable-next-line: no-string-literal
+        navigator['app'].exitApp();
+      })
 
     });
   }
