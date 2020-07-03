@@ -7,7 +7,7 @@ export const DE = {
     all: 'Alle Ausgaben',
     previous: 'Vorherige Ausgabe',
     favorites: 'Favoriten',
-    noMoreIssue: 'Unglücklicherweise existieren keine weiteren Ausgaben.'
+    noMoreIssue: 'Keine weiteren Ausgaben vorhanden.'
   },
   lang: {
     switch: 'Englische Version'
@@ -44,6 +44,9 @@ export const DE = {
     title: 'News teilen!',
     text: 'Schau dir das mal an...',
     noSharingOptionAvailable: 'Keine Funktion zum Teilen verfügbar'
+  },
+  app: {
+    loading: 'Lade...'
   }
 };
 
@@ -56,7 +59,7 @@ export const EN = {
     all: 'All Issues',
     previous: 'Previous Issue',
     favorites: 'Favourites',
-    noMoreIssue: 'Unfortunately, no more issues exist.'
+    noMoreIssue: 'No more issues available.'
   },
   lang: {
     switch: 'German Version'
@@ -93,5 +96,8 @@ export const EN = {
     title: 'share the news!',
     text: 'Have a look...',
     noSharingOptionAvailable: 'No functionality to share available'
+  },
+  app: {
+    loading: 'Loading...'
   }
 };
