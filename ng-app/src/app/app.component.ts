@@ -51,14 +51,17 @@ export class AppComponent {
         }),
         switchMap(() => timer(2000)),
         tap(() => {
-          this.showSplash = false;
           this.nav.navigateRoot('/');
+          this.showSplash = false;
         }),
       ).subscribe();
 
-      StatusBar.setStyle({
-        style: StatusBarStyle.Dark
-      });
+      if (this.platform.is('mobile') && (this.platform.is('ios') || this.platform.is('android'))) {
+        StatusBar.setStyle({
+          style: StatusBarStyle.Dark
+        });
+      }
+
 
       this.state.loading
         .pipe(

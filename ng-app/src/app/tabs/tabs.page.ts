@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Plugins, PushNotificationToken, PushNotification, PushNotificationActionPerformed } from '@capacitor/core';
 import { StateService } from '../shared/state.service';
-import { ToastController, IonTabs } from '@ionic/angular';
+import { ToastController, IonTabs, Platform } from '@ionic/angular';
 import { TranslatePipe } from '../shared/translate.pipe';
 import { combineLatest } from 'rxjs';
 
@@ -31,6 +31,7 @@ export class TabsPage implements OnInit, OnDestroy {
   constructor(
     public state: StateService,
     private toastController: ToastController,
+    private platform: Platform
   ) { }
 
 
@@ -58,48 +59,57 @@ export class TabsPage implements OnInit, OnDestroy {
       }
     });
 
-    PushNotifications.requestPermission().then(result => {
-      if (result.granted) {
-        // Register with Apple / Google to receive push via APNS/FCM
-        console.log('it was granted')
-        PushNotifications.register();
-      } else {
-        // Show some error
-        console.log('error requesting permission');
-        // On success, we should be able to receive notifications
+    this.platform.ready().then(() => {
+      if (this.platform.is('mobile') &&
+        this.platform.is('ios') ||
+        this.platform.is('android')
+      ) {
+
+        PushNotifications.requestPermission().then(result => {
+          if (result.granted) {
+            // Register with Apple / Google to receive push via APNS/FCM
+            console.log('it was granted')
+            PushNotifications.register();
+          } else {
+            // Show some error
+            console.log('error requesting permission');
+            // On success, we should be able to receive notifications
+          }
+        });
+
+        PushNotifications.addListener('registration',
+          (token: PushNotificationToken) => {
+            console.log('registered', token.value);
+            // alert('Push registration success, token: ' + token.value);
+          }
+        );
+
+        // Some issue with our setup and push will not work
+        PushNotifications.addListener('registrationError',
+          (error: any) => {
+            console.log('registration error', error);
+            // alert('Error on registration: ' + JSON.stringify(error));
+          }
+        );
+
+        // Show us the notification payload if the app is open on our device
+        PushNotifications.addListener('pushNotificationReceived',
+          (notification: PushNotification) => {
+            console.log('push received', notification);
+            // alert('Push received: ' + JSON.stringify(notification));
+          }
+        );
+
+        // Method called when tapping on a notification
+        PushNotifications.addListener('pushNotificationActionPerformed',
+          (notification: PushNotificationActionPerformed) => {
+            console.log('push performed', notification);
+            // alert('Push action performed: ' + JSON.stringify(notification));
+          }
+        );
       }
-    });
 
-    PushNotifications.addListener('registration',
-        (token: PushNotificationToken) => {
-          console.log('registered', token.value);
-          // alert('Push registration success, token: ' + token.value);
-        }
-      );
-
-      // Some issue with our setup and push will not work
-      PushNotifications.addListener('registrationError',
-        (error: any) => {
-          console.log('registration error', error);
-          // alert('Error on registration: ' + JSON.stringify(error));
-        }
-      );
-
-      // Show us the notification payload if the app is open on our device
-      PushNotifications.addListener('pushNotificationReceived',
-        (notification: PushNotification) => {
-          console.log('push received', notification);
-          // alert('Push received: ' + JSON.stringify(notification));
-        }
-      );
-
-      // Method called when tapping on a notification
-      PushNotifications.addListener('pushNotificationActionPerformed',
-        (notification: PushNotificationActionPerformed) => {
-          console.log('push performed', notification);
-          // alert('Push action performed: ' + JSON.stringify(notification));
-        }
-      );
+    })
   }
 
   ngOnDestroy() {
@@ -119,7 +129,7 @@ export class TabsPage implements OnInit, OnDestroy {
     const translate = new TranslatePipe(this.state);
     combineLatest([
       translate.transform('share.title'),
-      translate.transform('share.text')]).subscribe( async translation => {
+      translate.transform('share.text')]).subscribe(async translation => {
         await Share.share({
           dialogTitle: translation[0],
           title: translation[0],
