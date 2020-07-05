@@ -38,7 +38,7 @@ export class ArticlesService {
         )
       ),
       map(([issue, articles]) => ({ issue, articles })),
-      // tap(data => console.log('result', data))
+      tap(data => console.log('result', data))
     );
   }
 

@@ -19,7 +19,7 @@ export class ArticleTeaserComponent implements AfterViewInit {
   @Input() issue: any;
   @Input() hasMore: boolean;
   @Input() intended: boolean;
-  
+
   @Output() notifySlideChanged = new EventEmitter<number>();
 
   @ViewChild('articleSlider') slider: IonSlides;
@@ -29,13 +29,13 @@ export class ArticleTeaserComponent implements AfterViewInit {
   ) { }
 
   ngAfterViewInit() {
-    this.slider.getActiveIndex().then( index => {
+    this.slider.getActiveIndex().then(index => {
       this.state.activeSlideIndex.next(0);
-    } );
+    });
 
     this.state.activeLang.pipe(
       skip(1),
-      tap( () => this.slider.slideTo(0))
+      tap(() => this.slider.slideTo(0))
     ).subscribe()
   }
 
@@ -44,7 +44,7 @@ export class ArticleTeaserComponent implements AfterViewInit {
   }
 
   handleSlideChange() {
-    this.slider.getActiveIndex().then( index => {
+    this.slider.getActiveIndex().then(index => {
       this.state.activeSlideIndex.next(index);
 
 

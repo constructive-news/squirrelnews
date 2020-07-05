@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, OnInit } from '@angular/core';
+import { Component, AfterViewInit, OnInit, OnDestroy } from '@angular/core';
 
 import { ArticlesService } from '../shared/articles.service';
 import { Article } from './article';
@@ -31,6 +31,7 @@ export class HomePage implements OnInit, AfterViewInit {
 
   ionViewWillEnter() {
     this.state.loading.next(true);
+    this.state.activeTab.next('home');
     this.articlesSubscription =
     combineLatest([this.articlesService.getCurrentIssue2(0), this.state.activeSlideIndex]).subscribe( (result: any) => {
       this.currentArticles = result[0].articles;
@@ -42,14 +43,10 @@ export class HomePage implements OnInit, AfterViewInit {
       this.state.loading.next(false);
     });
 
-    this.state.activeTab.next('home');
   }
 
 
   ionViewWillLeave() {
-    this.articlesSubscription.unsubscribe();
-    this.state.loading.unsubscribe();
+    if (!!this.articlesSubscription) this.articlesSubscription.unsubscribe();
   }
-
-
 }
