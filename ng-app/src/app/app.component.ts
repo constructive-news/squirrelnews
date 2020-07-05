@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-
-import { Platform, NavController, IonRouterOutlet } from '@ionic/angular';
+import {  Location } from '@angular/common';
+import { Platform, NavController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar as StatusBarConfig } from '@ionic-native/status-bar/ngx';
 
@@ -34,7 +34,7 @@ export class AppComponent {
     private statusBar: StatusBarConfig,
     private state: StateService,
     private nav: NavController,
-    private routerOutlet: IonRouterOutlet
+    private location: Location
   ) {
     this.initializeApp();
 
@@ -62,6 +62,10 @@ export class AppComponent {
         StatusBar.setStyle({
           style: StatusBarStyle.Dark
         });
+
+        this.platform.backButton.subscribeWithPriority(-1, () => {
+          if(!(window.history.length > 1)) App.exitApp();
+        })
       }
 
 
@@ -70,11 +74,6 @@ export class AppComponent {
           tap(event => this.showSplash = event)
         )
         .subscribe();
-
-      this.platform.backButton.subscribeWithPriority(-1, () => {
-        if (!this.routerOutlet.canGoBack()) App.exitApp();
-      })
-
     });
   }
 }
