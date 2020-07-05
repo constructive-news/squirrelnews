@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { Platform, NavController } from '@ionic/angular';
+import { Platform, NavController, IonRouterOutlet } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar as StatusBarConfig } from '@ionic-native/status-bar/ngx';
 
@@ -14,6 +14,7 @@ import { switchMap, tap, skip } from 'rxjs/operators';
 
 const {
   StatusBar,
+  App
 } = Plugins;
 
 
@@ -33,6 +34,7 @@ export class AppComponent {
     private statusBar: StatusBarConfig,
     private state: StateService,
     private nav: NavController,
+    private routerOutlet: IonRouterOutlet
   ) {
     this.initializeApp();
 
@@ -69,9 +71,8 @@ export class AppComponent {
         )
         .subscribe();
 
-      this.platform.backButton.subscribe(() => {
-        // tslint:disable-next-line: no-string-literal
-        navigator['app'].exitApp();
+      this.platform.backButton.subscribeWithPriority(-1, () => {
+        if (!this.routerOutlet.canGoBack()) App.exitApp();
       })
 
     });
