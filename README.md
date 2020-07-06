@@ -1,7 +1,7 @@
 # squirrelnews
-Squirrel News App ulti-project repository contains all custom source code to use in the application. 
+Squirrel News App multi-project repository contains all custom source code to use in the application. 
 
-## Frontend
+## (App) Frontend
 
 The Frontend is an Angular Application utilyzing the ionic framework. 
 
@@ -16,7 +16,7 @@ The App uses Firebase as the backend and the credentials should not be exposed d
 and export the firebase configuration from the firebase console in your new file. Dont forget to export that configuration. The typical angular env typescript file will include it and exposing that to the rest of the application.
 
 
-### building  and deplying for preview
+### building  and deplying for preview [UNDER CONSTRUCTION!]
 
 Use 
 
@@ -32,6 +32,10 @@ assuming you are in ng-app subfolder: rm all from firebase hosting nd copy new s
 ### Angular Fire 
 
 The Frontend uses Angular Fire and is configured in Firebase as a Webapp as we are developing a hybrid solution that is as x-platform as possible. 
+
+## (Admin) Frontend [IN DEVELOPMENT]
+
+besides the 'ng-app' folder there is also an **admin.app** folder which contains another application, which will provide the possibility to manage issues and articles, like editing, creating and publishing.
 
 ## Firebase 
 
