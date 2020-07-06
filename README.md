@@ -1,5 +1,5 @@
 # squirrelnews
-Squirrel News App Monorepo contains all custom source code to use in the application. 
+Squirrel News App ulti-project repository contains all custom source code to use in the application. 
 
 ## Frontend
 
@@ -13,7 +13,7 @@ The App uses Firebase as the backend and the credentials should not be exposed d
 
     src/environtments
 
-and export the firebase configuration from the firebase console in your new file. Dont forget to export that configuration. 
+and export the firebase configuration from the firebase console in your new file. Dont forget to export that configuration. The typical angular env typescript file will include it and exposing that to the rest of the application.
 
 
 ### building  and deplying for preview
@@ -62,3 +62,7 @@ If your runtime conf or environment is empty, think about the following:
 Firebase stores its enviroment on localhost in a .runtimeconfig.json which should not be versioned in git for safety and security reasons. Instead, if you want to start developing you will need to ask an admin for a private key to access firestore from the function or if you are the admin, generate a new private key using the firebase console and store them in the respective file. 
 
 For more information visit: https://firebase.google.com/docs/functions/config-env
+
+## Help Wanted and Pull Requests are welcome 
+
+We have many ideas and plans for the app. If you want to join this project feel free to drop me a line on Twitter: [@olierxleben](https://twitter.com/olierxleben). We are a small team of volunteers and an even smaller team of developers who try to bring joy to the readers of digital newspapers. We also encourage this project for new OSS developers. If you want to help for Android, iOS, Web or Backend with Firebase we would like to hear from you. :)
